@@ -1,0 +1,30 @@
+#17_01_23
+Ciao Gabriele,
+le info sull'argomento in oggetto le puoi recuperare googlando
+
+arduino load cell hx711
+
+perchè corrisponde al kit che ti porterò domani.
+Il dispositivo in foto è basato su una singola cella di carico ma la meccanica
+che permette di usarne una sola è un po' sofisticata. Come già detto se però
+tu credi che la cella singola sia la soluzine giusta allora rivalutiamo il peso
+economico della meccanica necessaria.
+
+Ti porterò anche 4 celle di carico acquistate da aliexpress quindi dalle caratteristiche
+poco dettagliate. Costano poco ma ... sono affidabili? ripetitive? la dispersione delle
+caratteristiche tra i vari dispositivi è proibitiva? Compensabile?....
+Le celle comprate sono queste
+
+https://www.aliexpress.com/item/1PCS-DIY-50Kg-Body-Load-Cell-Weighing-Sensor-Resistance-strain-Half-bridge/32597969753.html?spm=2114.13010608.0.0.pC56uP
+
+
+Per la connessione elettrica dei dispositivi non farti problemi a chiedere anche se
+immagino potrà divertirti provare a fare da solo.
+
+http://www.instructables.com/id/Make-your-weighing-scale-hack-using-arduino/
+
+https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide
+
+https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide/arduino-code
+
+http://www.theorycircuit.com/interfacing-load-cell-arduino-using-hx711/
