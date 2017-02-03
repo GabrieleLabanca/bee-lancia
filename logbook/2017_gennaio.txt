@@ -28,3 +28,25 @@ https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-g
 https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide/arduino-code
 
 http://www.theorycircuit.com/interfacing-load-cell-arduino-using-hx711/
+
+
+
+#17_01_27
+Dopo tre ore di lavoro, installato correttamente IDE Ardino. Provato sul mio UNO, Blink funziona.
+
+Montaggio secondo http://www.instructables.com/id/Make-your-weighing-scale-hack-using-arduino/
+
+
+
+#17_02_03
+
+|  CELLE DI CARICO : Vcc = bianco  Vss = nero  signal = rosso
+|  S+ -> A+    |  GND  -> GND    
+|  S- -> A-    |  VCC  -> 5V
+|  E+ -> E+    |  DT   -> A1
+|  E- -> E-    |  SCK  -> A0 
+|
+
+
+Circuito montato: dubbio sui collegamenti delle celle di carico, provo intanto con Vcc collegato a Vss della successiva.
+L'apparato funziona: il programma compila, gira e c'e' una reazione corrispondente (contemporanea) alla variazione di peso. Non mi e' molto chiaro come oscilli la misura: sembra cambiare un po' a casaccio; forse e' un problema di sensibilita'.
