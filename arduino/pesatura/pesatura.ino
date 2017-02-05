@@ -23,7 +23,7 @@ void setup()
   Serial.println(scale.get_units(5), 1);  
 /// print the average of 5 readings from the ADC minus tare weight 
 //(not set) divided by the SCALE parameter (not set yet) 
-  scale.set_scale(2280.f);  
+  scale.set_scale(114.f);//scale.set_scale(2280.f);  
  // this value is obtained by calibrating the scale with known weights; 
   //see the README for details
   scale.tare();   // reset the scale to 0
@@ -49,13 +49,12 @@ Serial.println("Readings:");
 }
 void loop() 
 {
-  Serial.print("Weight :");                        
-  /* ---------Weight in terms of KG-------------*/
-  Serial.print(scale.get_units()*0.1 , 1);
-  Serial.print("KG");
-  scale.power_down();             // put the ADC in sleep mode
-  delay(500);
-  Serial.print("\n");
-  
-  scale.power_up();
+    //Serial.print("Weight :");                        
+    /* ---------Weight in terms of KG-------------*/
+    Serial.print(scale.get_units()*0.1 , 1);
+    //Serial.print("KG");
+    scale.power_down();             // put the ADC in sleep mode
+    delay(1000);
+    Serial.print("\n");  
+    scale.power_up();
 }

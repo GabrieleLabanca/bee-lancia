@@ -1,0 +1,44 @@
+#17_02_03
+
+|  CELLE DI CARICO : Vcc = bianco  Vss = nero  signal = rosso
+|  S+ -> A+    |  GND  -> GND    
+|  S- -> A-    |  VCC  -> 5V
+|  E+ -> E+    |  DT   -> A1
+|  E- -> E-    |  SCK  -> A0 
+|
+
+
+Circuito montato: dubbio sui collegamenti delle celle di carico, provo intanto con Vcc collegato a Vss della successiva.
+L'apparato funziona: il programma compila, gira e c'e' una reazione corrispondente (contemporanea) alla variazione di peso. Non mi e' molto chiaro come oscilli la misura: sembra cambiare un po' a casaccio; forse e' un problema di sensibilita'.
+Provata lettura dal serial: https://chrisheydrick.com/2012/06/24/how-to-read-serial-data-from-an-arduino-in-linux-with-c-part-4/ fallito. Riprovero', per ora mi basta copincollare.
+
+Qualche prova:
+- un peso di 2kg viene letto con uno sbalzo a ~7kg, per poi scendere nel giro di 1-2 minuti a 3.
+- scosse sul tavolo, anche non fortissime, sballano un po'
+[[ ci vuole ~2min per l'assestamento ]]
+- tolto il peso, scende lentamente a 1.1
+- rimesso il peso, 4.5->3.6
+
+Problema: far si' che la DEFORMAZIONE AVVENGA. Ho risolto con stuzzicadenti messi ai lati delle celle.
+Problema del contatto: tutte le celle devono essere a contatto.
+Sembra non essere sensibile a variazioni di 0.5kg.
+Mettendo un kg, poi togliendolo, rimettendolo etc si osserva un andamento NON REGOLARE di salita-plateu-salita (dato ~1min per stabilizzarsi); le celle paiono non essere in grado di rilassarsi a 0. 
+Dopo un urto la scala si setta a un valore diverso.
+Con pesi piu' grandi (2kg) c'e' un rilassamento, ma irregolare.
+
+Piano di lavoro:
+- misure con aggiunta-rimozione di pesi e andamento temporale:
+	- ci sono regolarita' nei delta di salita/discesa?
+	- quanto tempo per stabilizzarsi?
+	- quanto varia l'errore in funzione del peso?
+
+
+
+#17_02_05
+[[ mi assicuro che tutte le celle tocchino contemporaneamente]]
+Problema: il peso sale indefinitamente senza che io faccia nulla... provo a rivedere i contatti. 
+Ho collegato i minijack direttamente con giunzione ai cavi del ponte Wheatstone.
+-> Misure migliori: 
+   - piu' stabilita'
+   - proporzionalita' segnale-peso
+-> Sensibilita' ridottissima: 2kg -> 0.1 di delta
