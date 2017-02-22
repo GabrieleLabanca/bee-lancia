@@ -42,3 +42,15 @@ Ho collegato i minijack direttamente con giunzione ai cavi del ponte Wheatstone.
    - piu' stabilita'
    - proporzionalita' segnale-peso
 -> Sensibilita' ridottissima: 2kg -> 0.1 di delta
+
+Lettura del codice: e' presente un fattore di scala, di 2280 di default. Modificandolo a 114 (= 2280/(2/0.1)) ci si avvicina a unita' sensate (2kg -> 1.6; 4kg-> 4.4), ma ci sono molte fluttuazioni.
+
+
+#17_02_16
+Prendo alcune serie di dati a peso costante. Bisognerebbe capire perche' funziona "a scalini".
+
+Cosa succede se prendo i dati "raw"? Provo a non usare la funzione get_units() e uso invece read().
+Le oscillazioni sono piu' chiare, ma si vede ugualmente la struttura a scalino (170216_002-fix_raw.dat)
+
+
+

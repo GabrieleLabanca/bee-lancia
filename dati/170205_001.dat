@@ -1,4 +1,4 @@
-#ogni aggiunta/rimozione di peso e all'inizio ho lasciato passare 2 min per stabilizzazione
+# ogni aggiunta/rimozione di peso e all'inizio ho lasciato passare 2 min per stabilizzazione
 # 0kg -> 2 kg -> 0kg -> 2kg -> 4kg -> 2kg -> 0kg
 # scale = 114
 # dt = 1s
