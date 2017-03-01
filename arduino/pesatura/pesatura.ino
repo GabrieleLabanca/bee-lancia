@@ -51,8 +51,8 @@ void loop()
 {
     //Serial.print("Weight :");                        
     /* ---------Weight in terms of KG-------------*/
-    //Serial.print(scale.get_units()*0.1 , 1); FUNZIONA
-    Serial.print(scale.read());
+    Serial.print(scale.get_units()*0.1 , 1); //FUNZIONA
+    //Serial.print(scale.read());
     //Serial.print("KG");
     scale.power_down();             // put the ADC in sleep mode
     delay(100);

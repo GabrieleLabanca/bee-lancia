@@ -22,7 +22,7 @@ int * n_lines(const char * name) {
 
 
 
-void plot(string filestring){
+float** plot(string filestring){
 
 	const char * filename = filestring.c_str();
 	int header = n_lines(filename)[0];
@@ -37,9 +37,9 @@ void plot(string filestring){
 	
 	for (int i=0; i< header; i++){
 		std::getline(file, temp);
-		std::cerr << temp << endl;
+		//std::cerr << temp << endl;
 	}
-	for (int i =1; i<lines; i++){
+	for (int i =0; i<lines; i++){
 		x[i] = i;
 		file >> y[i];
 		std::cerr << x[i] << "   " << y[i] << endl;
@@ -47,5 +47,11 @@ void plot(string filestring){
 
 	TGraph * plot = new TGraph (lines, x, y);	
 	plot -> Draw();
+
+	float** data_vect = new float*[2];
+	data_vect[0] = x;
+	data_vect[1] = y;
+
+	return data_vect;
 
 }

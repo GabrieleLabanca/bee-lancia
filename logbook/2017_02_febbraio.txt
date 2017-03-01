@@ -53,4 +53,21 @@ Cosa succede se prendo i dati "raw"? Provo a non usare la funzione get_units() e
 Le oscillazioni sono piu' chiare, ma si vede ugualmente la struttura a scalino (170216_002-fix_raw.dat)
 
 
+#17_02_22
+Root funzionante
 
+#17_02_23
+Ricerca info su internet:
+http://www.cardinalscale.com/2013/load-cell-troubleshooting-101/ dice che e' un problema di "moisture", ma non credo sia il mio caso
+-> negozio di elettronica   http://www.pinto.it/default.aspx   COMPRARE RESISTENZA DA ~250ohm, per cortocircuitare l'Arduino e controllare il segnale di input
+Per migliorare l'acquisizione, in futuro: tenere solo dati che o sono simili al precedente o continuano a essere molto diversi (cioe' quando il peso cambia)
+BISOGNA LEGGERE https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide dove forse spiega il filo rosso delle celle
+
+#17_02_27 e 28
+Comprato multimetro.
+Riassemblaggio con resistencome da Sparkfunsse come ponte di Wheatstone, ma [[shifting verso l'alto resta]].
+Scoperto schematics al sito https://www.sparkfun.com/products/13878?_ga=1.186640489.1126097763.1485380550.
+
+#17_03_01
+Riassemblato come da Sparkfun, ma resta shifting (il problema sembra quindi essere nell'Arduino/nell'ampli!).
+Prendo una misura per rendermi conto.
