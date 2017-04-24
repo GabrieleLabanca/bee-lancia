@@ -46,6 +46,7 @@ Serial.println(scale.get_units(5), 1);
 //divided by the SCALE parameter set with set_scale
  
 Serial.println("Readings:");
+scale.power_up();
 }
 void loop() 
 {
@@ -54,8 +55,9 @@ void loop()
     Serial.print(scale.get_units()*0.1 , 1); //FUNZIONA
     //Serial.print(scale.read());
     //Serial.print("KG");
-    scale.power_down();             // put the ADC in sleep mode
-    delay(100);
+    
+    //scale.power_down();             // put the ADC in sleep mode
+    delay(1000);
     Serial.print("\n");  
-    scale.power_up();
+    //scale.power_up();
 }

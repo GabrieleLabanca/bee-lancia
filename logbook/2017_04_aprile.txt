@@ -1,0 +1,9 @@
+170424
+
+
+
+tolto lo scale.power_down(), per mettere solo il .power_up() una volta per tutte
+Risultati brutti quanto prima
+
+dati 001 : condensatore elettrolitico parallelo all'alimentazione
+risultati strani: lunghissimi plateau perfettamente stabili, con scoppi di plateau piu' alti
