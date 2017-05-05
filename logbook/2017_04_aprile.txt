@@ -1,9 +1,18 @@
 170424
 
-
-
 tolto lo scale.power_down(), per mettere solo il .power_up() una volta per tutte
 Risultati brutti quanto prima
 
 dati 001 : condensatore elettrolitico parallelo all'alimentazione
-risultati strani: lunghissimi plateau perfettamente stabili, con scoppi di plateau piu' alti
+risultati strani: lunghissimi plateau perfettamente stabili, con scoppi di plateau piu' alti [1]
+
+
+170426
+
+Controllato circuito: il problema [1] era evidentemente qualcosa montato male. Resta pero' la salita sistematica, ancora senza spiegazione
+
+Accordata con Roberto sessione di "laboratorio", per:
+- vedere con l'oscilloscopio se l'Arduino alimenta bene
+- verificare che l'amplificatore funzioni come dovuto
+- verificare che il metodo di acquisizoine da computer sia corretto
+- verificare che il circuito sia montato bene

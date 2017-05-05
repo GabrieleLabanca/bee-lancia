@@ -1,4 +1,4 @@
-//The library used for arduino  https://github.com/bogde/HX711<br>
+  //The library used for arduino  https://github.com/bogde/HX711<br>
 // LCD can also be used instead of serial 
 #include "HX711.h"
 // HX711.DOUT  - pin 10
@@ -7,6 +7,8 @@ HX711 scale(10, 11); // parameter "gain" is ommited; the default value 128 is us
 
 void setup() 
 {
+  scale.power_up();
+  delay(1000);;
   Serial.begin(38400);
   Serial.println("HX711 Demo");  Serial.println("Before setting up the scale:");
   Serial.print("read: \t\t ");
@@ -46,7 +48,7 @@ Serial.println(scale.get_units(5), 1);
 //divided by the SCALE parameter set with set_scale
  
 Serial.println("Readings:");
-scale.power_up();
+
 }
 void loop() 
 {
@@ -57,7 +59,7 @@ void loop()
     //Serial.print("KG");
     
     //scale.power_down();             // put the ADC in sleep mode
-    delay(1000);
+    delay(10000);
     Serial.print("\n");  
     //scale.power_up();
 }
