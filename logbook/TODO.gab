@@ -4,8 +4,11 @@
 [ ][ANALISI DATI]
 [ ]Stima del background
 --[ ]misure a brevi intervalli
---[ ]misure a lunghi intervalli
+--[ ]misure a lunghi intervalli  #va rifatto con taratura giusta
 [ ]Comportamento con peso variato
+--[X]taratura
+--[X]misure con pesi da 2-4kg
+--[ ]misure con pesi ~100g
 [ ]Comportamento con peso prolungato
 [ ]Comportamento con temperatura [?]
 

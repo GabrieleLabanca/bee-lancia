@@ -3,3 +3,20 @@
 [X] Il circuito finalmente funziona: con Roberto il 3 ci siamo trovati per saldare tutto e ora e' decente.
 Presi dati a 0.1 secondo: si nota shift verso l'alto di qualche 0.1
 
+
+170524
+
+Due prese dati: 
+# piu' di 24h di background, dt=100s
+# aggiunta-rimozione di pesi da 2kg, dt=1s
+Il comportamento e' ottimo: si procede con una  \\prima taratura\\: 
+    con "Serial.print(scale.get_units()*0.1 , 1);" a 4kg corrisponde 68.7
+messo il numero di scala u  = .0058224 e funziona
+
+\\Aggiungo cifre decimali\\: non piu' di 3 perche' non avrebbe senso, data la precisione di 0.1 desiderata; ma voglio vedere quanto e' stabile
+Prima nota: i due pesi forse non sono esattamente 2+2kg: uso una bilancia elettronica per controllare: sono in realta' 3870g
+=> \\ritaro\\ con u=.005600966442953021 (v*4.023=3.870; X*u_old*0.1=4.023)
+Ora e' //preciso alla 2a cifra decimale!// quindi e' stata una buona scelta tenere la terza, ma non serve la quarta
+
+
+
