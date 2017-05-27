@@ -22,7 +22,7 @@ int * n_lines(const char * name) {
 
 
 
-float** plot(string filestring){
+float** plot(string filestring, float unit=1){
 
 	const char * filename = filestring.c_str();
 	int header = n_lines(filename)[0];
@@ -40,7 +40,7 @@ float** plot(string filestring){
 		//std::cerr << temp << endl;
 	}
 	for (int i =0; i<lines; i++){
-		x[i] = i;
+		x[i] = i*unit; // rescale x
 		file >> y[i];
 		std::cerr << x[i] << "   " << y[i] << endl;
 	}
