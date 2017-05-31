@@ -13,13 +13,18 @@ class datafile
     int get_n_lines() { return lines; } 
     int get_n_elab() { return n_elab; }
 
+    float get_x(int i) { return x[i]; }
+    float get_y(int i) { return y[i]; }
+    float get_xel(int i) { return x_elab[i]; }
+    float get_yel(int i) { return y_elab[i]; }
+
+
+    void clean_mean();
 
     void plot_data();
     void plot_elab();
 
   private:
-    const char * filename;
-    int headlines, lines;
     // actual data
     float * x;
     float * y;
@@ -28,8 +33,19 @@ class datafile
     float * x_elab;
     float * y_elab;
 
+    const char * filename;
+    int headlines, lines;
     void count_lines();
     void fill_data(float);
+
+    // iterators: start, border, explorer
+    int is, ib, ie;
+    void explore(float (*f)(float), int);
+
+
+    float quadratic(float, float, float, float);
+    void quadratic_fit(float*, float*, int, int, float&, float&, float&);
+
 
 };
 
@@ -59,6 +75,12 @@ void datafile::count_lines()
   }
 }
 
+void datafile::explore(float (*f)(float z), int howfar=5)
+{
+  float old, curr, diff;
+} 
+
+
 void datafile::fill_data(float unit)
 {
   using namespace std;
@@ -71,7 +93,6 @@ void datafile::fill_data(float unit)
   for (int i =0; i<lines; i++){
     x[i] = i*unit; // rescale x
     myfile >> y[i];
-    //std::cerr << x[i] << "   " << y[i] << endl;
   }
 }
 
@@ -93,30 +114,51 @@ void datafile::fill_mean(int N)
   using namespace std;
   int npoints = float(lines/N);
   n_elab = npoints;
-//  cerr << "npoints " << npoints << endl;
   x_elab = new float[npoints];
   y_elab = new float[npoints];
   float tsum = 0;
   int ireal = 0; //counts from 0 to lines
   for(int index=0; index<npoints; index++){ //counts the points in _elab
     for(int i=0; i<N; i++){ //counts the points over which mean is taken
-    //  cerr << "y[i] " << y[ireal] << endl;
       tsum += y[ireal];
       ++ireal;
     }
-   // cerr << "TSUM " << tsum << endl;
     x_elab[index] = N*(index+1./2);
     y_elab[index] = tsum/int(N);
-    //cerr << x_elab[index] << " " << y_elab[index] << endl;
     tsum = 0;
+  }
+}
+
+void datafile::clean_mean()
+{
+  //assumes the first point as the real one
+  //removes systematic noise fitting with quadratic curves
+
+  float a, b, c;
+  float *x;
+  //once parameters are known, removes systematic
+  int end, start;
+  int n_in_interval = end - start;
+  for(int i=0; i<n_in_interval; i++){
+    y[i] -= quadratic(a,b,c,x[i]);
   }
 }
 
 
 
+//quadratic curve: a*x*x+b*x+c
+float datafile::quadratic (float a, float b, float c, float x)
+{
+  return a*x*x+b*x+c;
+}
+//quadratic curve: a*x*x+b*x+c
+void datafile::quadratic_fit(float * x, float * y, int begin, int end, float & a, float & b, float & c)
+{
+  //given a distribution, puts in a,b,c the parameters of the fit
+}
 
-
-
+/////////////////////////////////////////////////////
+//UI FOR datafile
 
 
 void plot_file(string NAME, float UNIT=1)
@@ -131,6 +173,10 @@ void plot_mean(string NAME, float UNIT=1, int NMEAN=5)
   mydata.fill_mean(NMEAN);
   mydata.plot_elab();
 }
+
+
+//////////////////////
+
 
 
 

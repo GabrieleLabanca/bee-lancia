@@ -32,3 +32,16 @@ L'obiettivo diventa ora automatizzare un programma che riconosca queste struttur
 NB: quando il peso aumentera', bisogna vedere con che velocita' lo fara', cioe' quanto influira' sul moto parabolico!
 
 Ho trasformato in object-oriented il file plot.cxx, che ora diventa machine.cxx: funzione plot_file pronta
+
+
+170531
+
+Lavoro a machine.cxx
+Funzione per ottenere la media.
+
+Progetto per il fit_in_progress:
+\\procedura transizione fit\\
+tre iteratori: start, border, explorer
+partono insieme. Explorer va avanti e misura la deviazione dal fit atteso. Quando e' buona, casuale, border lo segue; altrimenti si segna lo start-border per il primo fit, dopodiche' start va dov'e' border, explorer torna a start e si ricomincia
+\\procedura creazione fit\\
+explorer e border vanno avanti di 10
