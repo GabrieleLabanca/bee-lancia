@@ -8,23 +8,30 @@ class datafile
   public:
     datafile(string,float);
 
-    void fill_mean(int);
 
+    // get parameters
     int get_n_lines() { return lines; } 
     int get_n_elab() { return n_elab; }
-
     float get_x(int i) { return x[i]; }
     float get_y(int i) { return y[i]; }
     float get_xel(int i) { return x_elab[i]; }
     float get_yel(int i) { return y_elab[i]; }
+    float get_u() { return unit; }
 
+    // mean
+    void fill_mean(int);
+    void clean_quad();
 
-    void clean_mean();
-
+    // plot 
     void plot_data();
     void plot_elab();
+    // graphs
+    TGraph * gr_raw;
+    TGraph * gr_elab;
+
 
   private:
+    float unit;
     // actual data
     float * x;
     float * y;
@@ -40,18 +47,16 @@ class datafile
 
     // iterators: start, border, explorer
     int is, ib, ie;
-    void explore(float (*f)(float), int);
+    void explore(TF1*, float, int);
 
-
-    float quadratic(float, float, float, float);
-    void quadratic_fit(float*, float*, int, int, float&, float&, float&);
-
-
+    //float a, b, c;
+    TF1 * quad = new TF1("quad","[2]*x*x+[1]*x+[0]",0,10);
+    //  void quadratic_fit(float*, float*, int, int, float&, float&, float&);
 };
 
 
-datafile::datafile(string filestring, float unit):
-  filename(filestring.c_str())
+datafile::datafile(string filestring, float myunit):
+  filename(filestring.c_str()),unit(myunit)
 {
   count_lines();
   x = new float[lines];
@@ -75,9 +80,14 @@ void datafile::count_lines()
   }
 }
 
-void datafile::explore(float (*f)(float z), int howfar=5)
+void datafile::explore(TF1 * f, float sigma, int howfar=5)
 {
-  float old, curr, diff;
+  // goes on until for 'howfar' times sigma is exceeded
+  int count = 0;
+  while( count<howfar ){
+    ++ie;
+    if( ( (*f)(x[ie]) - y[ie] ) > sigma ) ++count;
+  }
 } 
 
 
@@ -94,18 +104,17 @@ void datafile::fill_data(float unit)
     x[i] = i*unit; // rescale x
     myfile >> y[i];
   }
+  gr_raw = new TGraph (lines, x, y);	
 }
 
 void datafile::plot_data()
 {
-  TGraph * plot = new TGraph (lines, x, y);	
-  plot -> Draw();
+  gr_raw -> Draw();
 }
 
 void datafile::plot_elab()
 {
-  TGraph * plot = new TGraph (n_elab, x_elab, y_elab);	
-  plot -> Draw();
+  gr_elab -> Draw();
 }
 
 
@@ -127,35 +136,47 @@ void datafile::fill_mean(int N)
     y_elab[index] = tsum/int(N);
     tsum = 0;
   }
+  gr_elab = new TGraph (n_elab, x_elab, y_elab);	
 }
 
-void datafile::clean_mean()
+void datafile::clean_quad()
 {
   //assumes the first point as the real one
   //removes systematic noise fitting with quadratic curves
 
-  float a, b, c;
-  float *x;
-  //once parameters are known, removes systematic
-  int end, start;
-  int n_in_interval = end - start;
-  for(int i=0; i<n_in_interval; i++){
-    y[i] -= quadratic(a,b,c,x[i]);
+  is =0; 
+  ie = 100;
+  TFitResultPtr r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
+
+  while(ie < lines){
+    /*float a = quad->GetParameter(2);
+    float b = quad->GetParameter(1);
+    float c = quad->GetParameter(0);
+    */
+
+    explore(quad,0.01,5);
+
+    //once parameters are known, removes systematic
+    int n_in_interval = ie - is;
+    for(int i=is; i<n_in_interval; i++){
+      y[i] -= (*quad)(x[i]);
+    }
+
+    is = ie; 
+    if( ie+100 < lines ) ie += 100; 
+    else ie = lines;
+
+    r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
+
   }
+  gr_raw = new TGraph(lines,x,y);
 }
 
 
 
-//quadratic curve: a*x*x+b*x+c
-float datafile::quadratic (float a, float b, float c, float x)
-{
-  return a*x*x+b*x+c;
-}
-//quadratic curve: a*x*x+b*x+c
-void datafile::quadratic_fit(float * x, float * y, int begin, int end, float & a, float & b, float & c)
-{
-  //given a distribution, puts in a,b,c the parameters of the fit
-}
+
+
+
 
 /////////////////////////////////////////////////////
 //UI FOR datafile

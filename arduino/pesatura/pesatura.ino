@@ -59,7 +59,7 @@ void loop()
     //Serial.print("KG");
     
     //scale.power_down();             // put the ADC in sleep mode
-    delay(100000);
+    delay(1000);
     Serial.print("\n");  
     //scale.power_up();
 }
