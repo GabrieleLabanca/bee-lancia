@@ -1,13 +1,12 @@
 #include <fstream> 
 #include <string>
 #include <iostream>
-
+#include <cmath>
 
 class datafile
 {
   public:
     datafile(string,float);
-
 
     // get parameters
     int get_n_lines() { return lines; } 
@@ -30,7 +29,7 @@ class datafile
     TGraph * gr_elab;
 
 
-  private:
+    //private:
     float unit;
     // actual data
     float * x;
@@ -84,9 +83,13 @@ void datafile::explore(TF1 * f, float sigma, int howfar=5)
 {
   // goes on until for 'howfar' times sigma is exceeded
   int count = 0;
+  float error = 0;
   while( count<howfar ){
     ++ie;
-    if( ( (*f)(x[ie]) - y[ie] ) > sigma ) ++count;
+    //cerr << "f = " <<  (*f)(x[ie]) << " y[ie] " << y[ie] << endl;
+    error = abs( (*f)(x[ie]) - y[ie] );
+    //cerr << "cumulative " << cumulative << " sigma " << sigma << endl;
+    if( error  > sigma ) ++count;
   }
 } 
 
@@ -143,31 +146,25 @@ void datafile::clean_quad()
 {
   //assumes the first point as the real one
   //removes systematic noise fitting with quadratic curves
-
   is =0; 
   ie = 100;
   TFitResultPtr r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
-
   while(ie < lines){
     /*float a = quad->GetParameter(2);
-    float b = quad->GetParameter(1);
-    float c = quad->GetParameter(0);
-    */
-
+      float b = quad->GetParameter(1);
+      float c = quad->GetParameter(0);
+      */
     explore(quad,0.01,5);
-
     //once parameters are known, removes systematic
-    int n_in_interval = ie - is;
-    for(int i=is; i<n_in_interval; i++){
+    //int n_in_interval = ie - is;
+    for(int i=is; i<ie; i++){
       y[i] -= (*quad)(x[i]);
     }
-
     is = ie; 
     if( ie+100 < lines ) ie += 100; 
     else ie = lines;
-
+    cout << ie << " corresponding to t = " << ie*100./3600 << endl;
     r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
-
   }
   gr_raw = new TGraph(lines,x,y);
 }
@@ -185,6 +182,7 @@ void datafile::clean_quad()
 void plot_file(string NAME, float UNIT=1)
 {
   datafile mydata(NAME,UNIT);
+  mydata.clean_quad();
   mydata.plot_data();
 }
 
