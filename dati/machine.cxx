@@ -21,11 +21,16 @@ class datafile
     void fill_mean(int);
     void clean_quad();
 
+    // derivative
+    double get_derivative();
+
     // plot 
-    void plot_data();
+    void plot_data(char);
     void plot_elab();
     // graphs
     TGraph * gr_raw;
+    TGraph * gr_der;
+    TH1F   * h_der;
     TGraph * gr_elab;
 
 
@@ -34,6 +39,7 @@ class datafile
     // actual data
     float * x;
     float * y;
+    float * dy; // derivative
     // elaboration
     int n_elab;
     float * x_elab;
@@ -110,9 +116,16 @@ void datafile::fill_data(float unit)
   gr_raw = new TGraph (lines, x, y);	
 }
 
-void datafile::plot_data()
+void datafile::plot_data(char mode = '0')
 {
-  gr_raw -> Draw();
+  switch(mode){
+    case '0': 
+      gr_raw -> Draw();
+      break;
+    case 's':
+      gr_raw -> Draw("same");
+      break;
+  }
 }
 
 void datafile::plot_elab()
@@ -150,23 +163,40 @@ void datafile::clean_quad()
   ie = 100;
   TFitResultPtr r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
   while(ie < lines){
-    /*float a = quad->GetParameter(2);
-      float b = quad->GetParameter(1);
-      float c = quad->GetParameter(0);
+    /*float a = quad->GetParameter(2); // x*x
+      float b = quad->GetParameter(1); // x
+      float c = quad->GetParameter(0); // 1
       */
-    explore(quad,0.01,5);
+    explore(quad,0.02,1);   // function, sigma, howfar
     //once parameters are known, removes systematic
     //int n_in_interval = ie - is;
     for(int i=is; i<ie; i++){
-      y[i] -= (*quad)(x[i]);
+      y[i] -= quad->GetParameter(2)*x[i]*x[i] + quad->GetParameter(1)*x[i]; //(*quad)(x[i]);
     }
     is = ie; 
-    if( ie+100 < lines ) ie += 100; 
+    if( ie+50 < lines ) ie += 50; 
     else ie = lines;
     cout << ie << " corresponding to t = " << ie*100./3600 << endl;
     r = gr_raw->Fit(quad,"S","",is*unit,ie*unit);
   }
   gr_raw = new TGraph(lines,x,y);
+}
+
+double datafile::get_derivative()
+{
+  double d_mean = 0; 
+  dy = new float[lines];
+  dy[0] = 0;
+  h_der = new TH1F("h_der","derivative distribution",1000,-0.01,0.01);
+  for(int i=1; i<lines; ++i){
+    dy[i] = (y[i] - y[i-1]);//unit;
+    d_mean += dy[i];
+    //cerr << dy[i] << endl;
+    h_der->Fill(dy[i]);
+  }
+  gr_der = new TGraph(lines,x,dy);
+  gr_der->Draw();
+  return d_mean/lines;
 }
 
 
@@ -182,8 +212,9 @@ void datafile::clean_quad()
 void plot_file(string NAME, float UNIT=1)
 {
   datafile mydata(NAME,UNIT);
-  mydata.clean_quad();
   mydata.plot_data();
+  mydata.clean_quad();
+  mydata.plot_data('s');
 }
 
 void plot_mean(string NAME, float UNIT=1, int NMEAN=5)
