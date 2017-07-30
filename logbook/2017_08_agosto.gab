@@ -1,0 +1,7 @@
+170630
+
+Sto studiando l'uso di SD (dovrei esserci).
+Problemi a usare la libreria HX711.h, probabilmente dovuti alla versione vecchia dell'IDE di Mint. Provo a installarlo da git.
+L'IDE funziona. La libreria si e' caricata.
+//PROBLEMA
+pare che SD.begin() utilizzi i pin 11,12,13 e 10 (www.arduino.cc/en/Reference/SDbegin), gli stessi usati nella costruzione del circuito per collegare l'HX711!
