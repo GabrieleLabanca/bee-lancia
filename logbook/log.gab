@@ -208,4 +208,18 @@ Pare funzionare: provo a lasciarlo qualche ora, collegato col caricatore del cel
 170921
 Tutto andato bene: la presa dati ha senso.
 Aggiunto DHT11, sensore termo+umidita', che Roberto mi ha fornito essendo il mio rotto per qualche ragione ignota (puzza di fumo): di nuovo qualche giorno di presa dati.
-Analisi dei dati in arrivo: sono comunque stabili intorno a un valore 5.84-5.96 (delta di 0.120 che e' tanto, ma vedremo la media). Root fa le bizze (non si installa), quindi passo a qualcosa di piu' terra terra, ovvero Gnuplot+cplusplus
+Analisi dei dati in arrivo: sono comunque stabili intorno a un valore 5.84-5.96 (delta di 0.120 che e' tanto, ma vedremo la media). Root fa le bizze (non si installa), quindi passo a qualcosa di piu' terra terra, ovvero Gnuplot+cplusplus.
+
+to_plot.cxx passa da un documento del tipo
+# aaa
+# bbb
+1 2 3 4 
+5 6 7 8
+9 1 2 3
+a un documento del tipo
+0 1 2 3 4
+1 5 6 7 8
+2 9 1 2 3
+rendendolo quindi pronto per il plot.
+
+Il plot provvisorio mostra che in 24h l'oscillazione del dato crudo e' intorno ai 10g, che con una running mean potrebbe ridursi di molto e rendere quindi abbastanza precisa la pesatura.
