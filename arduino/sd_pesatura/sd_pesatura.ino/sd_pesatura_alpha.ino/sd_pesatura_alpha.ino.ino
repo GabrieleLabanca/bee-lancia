@@ -79,7 +79,7 @@ void loop()
   }
 
   //scale.power_down();             // put the ADC in sleep mode
-  delay(1000);
+  delay(60000); //ogni minuto
   //scale.power_up();
   
 
