@@ -87,7 +87,7 @@ void loop()
     outfile.print(DHT.temperature);
     outfile.print(' ');
     outfile.print(DHT.humidity);
-    //outfile.print('\n');
+    outfile.print('\n');
     outfile.close();
   }
   else {

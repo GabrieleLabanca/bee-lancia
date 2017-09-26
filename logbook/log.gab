@@ -223,3 +223,10 @@ a un documento del tipo
 rendendolo quindi pronto per il plot.
 
 Il plot provvisorio mostra che in 24h l'oscillazione del dato crudo e' intorno ai 10g, che con una running mean potrebbe ridursi di molto e rendere quindi abbastanza precisa la pesatura.
+
+
+
+
+
+170926
+Raccolta dati dopo qualche giorno di temperatura+peso fisso. Purtroppo avevo sbagliato a fare il programma, quindi i dati erano su un'unica riga: con rearrange.py ho messo un a capo ogni 17 caratteri e sembra avere senso, provo a plottare.

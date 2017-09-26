@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 {
   char* in_file = argv[1];
   count_lines(in_file);
-  cerr << lines << endl;
+  //cerr << lines << endl;
   count_columns(in_file);
   
   float * x = new float[lines];
@@ -67,11 +67,11 @@ int main(int argc, char** argv)
   char* out_file = argv[2];
   ofstream ofile(out_file);
   for(int i=0; i<lines; ++i){
-    cerr << x[i] << " " ;
+    ofile << x[i] << " " ;
     for(int j=0; j<columns; ++j){
-      cerr << y.at(j).at(i) << " " ;
+      ofile << y.at(j).at(i) << " " ;
     } 
-    cerr << endl;
+    ofile << endl;
   }
 
   
