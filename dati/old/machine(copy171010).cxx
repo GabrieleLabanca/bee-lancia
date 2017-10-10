@@ -4,33 +4,9 @@
 #include <cmath>
 
 class datafile
-{  
+{
   public:
-    // constructor
     datafile(string,float);
-
-    // UI functions 
-    void plot_data(char);
-    void plot_elab(); 
-    
-    // mean
-    void fill_mean(int);
-    void clean_quad();
-
-
-    
-    // graphs
-    TGraph * gr_raw;  // actual data
-    TGraph * gr_der;  // "derivative"of data
-    TH1F   * h_der;   // histogram of "derivatives"
-    TGraph * gr_elab; // data after elaboration
-
-    // ntuple 
-    TNtuple* nt_data = new TNtuple("nt_data",
-                    "data from Arduino",
-                    "Time:Weight:Temperature:Humidity");
-
-  //protected:
 
     // get parameters
     int get_n_lines() { return lines; } 
@@ -41,36 +17,38 @@ class datafile
     float get_yel(int i) { return y_elab[i]; }
     float get_u() { return unit; }
 
-        // derivative
+    // mean
+    void fill_mean(int);
+    void clean_quad();
+
+    // derivative
     double get_derivative();
 
+    // plot 
+    void plot_data(char);
+    void plot_elab();
+    // graphs
+    TGraph * gr_raw;
+    TGraph * gr_der;
+    TH1F   * h_der;
+    TGraph * gr_elab;
 
 
-
-  //private:
-    float unit; // to rescale i.e. the time
-    /* EXAMPLE: acquisition every minute 
-     * unit=1./60 gives the time on the axis in units of 1 hour
-     */
-
+    //private:
+    float unit;
     // actual data
     float * x;
     float * y;
-    float * T;
-    float * hum;
     float * dy; // derivative
-
-    // data after elaboration
+    // elaboration
     int n_elab;
     float * x_elab;
     float * y_elab;
 
-    const char * filename;// name of the file to read from
-    int headlines, lines; // to be set by count_lines()
-    void count_lines();   // counts actual lines vs. header lines ("# ...") 
-                           
+    const char * filename;
+    int headlines, lines;
+    void count_lines();
     void fill_data(float);
-    void fill_ntuple(float);
 
     // iterators: start, border, explorer
     int is, ib, ie;
@@ -82,23 +60,15 @@ class datafile
 };
 
 
-// CONSTRUCTOR
-// sets: filename, unit
-// fills x, y 
 datafile::datafile(string filestring, float myunit):
   filename(filestring.c_str()),unit(myunit)
 {
   count_lines();
-  x   = new float[lines];
-  y   = new float[lines];
-  T   = new float[lines];
-  hum = new float[lines];
+  x = new float[lines];
+  y = new float[lines];
   fill_data(unit); 
-  fill_ntuple(unit);
 }
 
-// performs a count of headlines and effective lines
-// sets: headlines, lines
 void datafile::count_lines()
 {
   using namespace std;
@@ -115,13 +85,9 @@ void datafile::count_lines()
   }
 }
 
-// finds the first point exceeding an arbitrary deviation from a given function
-// f: the desired f(x) fitting the data
-// sigma: the maximum deviation allowed
-// howfar: number of times sigma can be exceeded 
-//         before considering it a consistent behaviour//
 void datafile::explore(TF1 * f, float sigma, int howfar=5)
 {
+  // goes on until for 'howfar' times sigma is exceeded
   int count = 0;
   float error = 0;
   while( count<howfar ){
@@ -133,9 +99,7 @@ void datafile::explore(TF1 * f, float sigma, int howfar=5)
   }
 } 
 
-// extracts data from the file and creates a corresponding TGraph
-// sets: gr_raw
-// REQUIRES: headlines, lines
+
 void datafile::fill_data(float unit)
 {
   using namespace std;
@@ -147,38 +111,11 @@ void datafile::fill_data(float unit)
   }
   for (int i =0; i<lines; i++){
     x[i] = i*unit; // rescale x
-    myfile >> y[i] >> T[i] >> hum[i];
+    myfile >> y[i];
   }
   gr_raw = new TGraph (lines, x, y);	
 }
 
-void datafile::fill_ntuple(float unit)
-{
-  using namespace std;
-  ifstream myfile(filename);
-  string temp;
-  for (int i=0; i< headlines; i++){
-    getline(myfile, temp);
-  }
-  float time, weight, temperature, humidity;
-  for (int i =0; i<lines; i++){
-    time = i*unit; // rescale time
-    myfile >> weight;
-    myfile >> temperature;
-    myfile >> humidity;
-    cerr << "i=" << i << ": " << time << " " 
-                              << weight << " "
-                              << temperature << " "
-                              << humidity << endl;
-    nt_data->Fill(time,weight,temperature,humidity);
-  }
-}
-
-
-
-// plots gr_raw (actual data)
-// mode: '0'  normal plot
-//       's'  option "same" passed to TGraph->Draw
 void datafile::plot_data(char mode = '0')
 {
   switch(mode){
@@ -191,17 +128,12 @@ void datafile::plot_data(char mode = '0')
   }
 }
 
-
-// plots gr_elab (data after elaboration)
 void datafile::plot_elab()
 {
   gr_elab -> Draw();
 }
 
 
-// performs a simple mean on the data and fills a TGraph
-// REQUIRES: fill_data()
-// N: every N points, a mean-point is produced
 void datafile::fill_mean(int N)
 {
   using namespace std;
@@ -223,10 +155,6 @@ void datafile::fill_mean(int N)
   gr_elab = new TGraph (n_elab, x_elab, y_elab);	
 }
 
-
-
-//assumes the first point as the real one
-//removes systematic noise fitting with quadratic curves
 void datafile::clean_quad()
 {
   //assumes the first point as the real one
@@ -254,11 +182,8 @@ void datafile::clean_quad()
   gr_raw = new TGraph(lines,x,y);
 }
 
-
-// fills gr_der with derivative
 double datafile::get_derivative()
 {
-
   double d_mean = 0; 
   dy = new float[lines];
   dy[0] = 0;

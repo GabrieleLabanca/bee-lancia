@@ -13,6 +13,8 @@ HX711 scale(7,6); // parameter "gain" is omitted; the default value 128 is used 
 
 dht DHT;
 #define DHT11_PIN 4 //signal pin (has to be digital)
+
+#define DELAY_TIME 60000 //1 minute
   
 File outfile;
 File myFile;
@@ -71,6 +73,11 @@ void loop()
   float measure = scale.get_units();//* .005600966442953021;
   int chk = DHT.read11(DHT11_PIN);
 
+  // write header of file
+  outfile = SD.open("data.txt", FILE_WRITE);
+  outfile.print("#interval of acquisition: ");
+  outfile.print(DELAY_TIME);
+  outfile.print('\n');
 
   
   Serial.print(measure, 3); //tara con 3.870kg 
@@ -95,7 +102,7 @@ void loop()
   }
 
   //scale.power_down();             // put the ADC in sleep mode
-  delay(60000); //ogni minuto
+  delay(DELAY_TIME); //ogni minuto
   //scale.power_up();
   
 

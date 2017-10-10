@@ -230,3 +230,11 @@ Il plot provvisorio mostra che in 24h l'oscillazione del dato crudo e' intorno a
 
 170926
 Raccolta dati dopo qualche giorno di temperatura+peso fisso. Purtroppo avevo sbagliato a fare il programma, quindi i dati erano su un'unica riga: con rearrange.py ho messo un a capo ogni 17 caratteri e sembra avere senso, provo a plottare.
+Molti dati sono da buttare: qualcosa e' caduto sulla bilancia... Comunque i pochi dati a disposizione mostrano un trend credibile temperatura-peso misurato. Ripetero'.
+
+
+171010
+Raccolta dati durata una settimana (fatta ripartire perche' ci avevano messo un casco di banane sopra...).
+Inizio a fare analisi dati: rimetto in sesto machine.cxx, visto che ora root va; uso le TNtuple, scoprendo cose interessanti mentre cerco di farle funzionare
+- si potrebbe fare un'analisi dati statistica guardando l'istogramma: c'e' un bel picco per il peso vero
+Noto stranezze, guardo i dati: ci sono righe strambe e le sostituisco con 0 0 0
