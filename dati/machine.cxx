@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <vector>
+#include <map>
 
 class datafile
 {  
@@ -12,25 +14,31 @@ class datafile
     // UI functions 
     void plot_data(char);
     void plot_elab(); 
-    
+
     // mean
     void fill_mean(int);
     void clean_quad();
 
+    // relative maximums
+    map<float,float> find_max_weight(); // returns vector of time of maximums
+    void fill_graph_weight_max();
 
-    
     // graphs
     TGraph * gr_raw;  // actual data
-    TGraph * gr_der;  // "derivative"of data
+    TGraph * gr_weight_raw; // actual data, weight
+    TGraph * gr_weight_max; // max of actual data, weight
+    TGraph * gr_temper_raw; // actual data, temperature
+    TGraph * gr_weight_der;  // "derivative" of weight
+    TGraph * gr_temper_der;  // "derivative" of temperature
     TH1F   * h_der;   // histogram of "derivatives"
     TGraph * gr_elab; // data after elaboration
 
     // ntuple 
     TNtuple* nt_data = new TNtuple("nt_data",
-                    "data from Arduino",
-                    "Time:Weight:Temperature:Humidity");
+        "data from Arduino",
+        "Time:Weight:Temperature:Humidity");
 
-  //protected:
+    //protected:
 
     // get parameters
     int get_n_lines() { return lines; } 
@@ -41,24 +49,29 @@ class datafile
     float get_yel(int i) { return y_elab[i]; }
     float get_u() { return unit; }
 
-        // derivative
-    double get_derivative();
+    // derivative
+    double get_weight_derivative();
+    double get_temperature_derivative();
 
-
-
+    void fill_data(float);
+    void fill_ntuple(float);
 
   //private:
     float unit; // to rescale i.e. the time
     /* EXAMPLE: acquisition every minute 
      * unit=1./60 gives the time on the axis in units of 1 hour
      */
+    bool ACQUISITION_DONE = 0; // set to 1 the first time file is scanned 
 
     // actual data
     float * x;
     float * y;
     float * T;
     float * hum;
-    float * dy; // derivative
+    // derivative
+    float * dy; 
+    float * dT;
+
 
     // data after elaboration
     int n_elab;
@@ -68,9 +81,6 @@ class datafile
     const char * filename;// name of the file to read from
     int headlines, lines; // to be set by count_lines()
     void count_lines();   // counts actual lines vs. header lines ("# ...") 
-                           
-    void fill_data(float);
-    void fill_ntuple(float);
 
     // iterators: start, border, explorer
     int is, ib, ie;
@@ -134,7 +144,7 @@ void datafile::explore(TF1 * f, float sigma, int howfar=5)
 } 
 
 // extracts data from the file and creates a corresponding TGraph
-// sets: gr_raw
+// sets: gr_raw, gr_weight_raw, gr_temper_raw, ACQUISITION_DONE
 // REQUIRES: headlines, lines
 void datafile::fill_data(float unit)
 {
@@ -149,28 +159,43 @@ void datafile::fill_data(float unit)
     x[i] = i*unit; // rescale x
     myfile >> y[i] >> T[i] >> hum[i];
   }
-  gr_raw = new TGraph (lines, x, y);	
+  gr_raw = new TGraph (lines, x, y);
+  gr_weight_raw = new TGraph (lines, x, y);
+  gr_temper_raw = new TGraph (lines, x, T);
+
+  ACQUISITION_DONE = 1;
 }
 
+// extracts data from the file and fills the NTntuple nt_data
+// sets: nt_data
+// REQUIRES: headlines, lines
 void datafile::fill_ntuple(float unit)
 {
-  using namespace std;
-  ifstream myfile(filename);
-  string temp;
-  for (int i=0; i< headlines; i++){
-    getline(myfile, temp);
-  }
-  float time, weight, temperature, humidity;
-  for (int i =0; i<lines; i++){
-    time = i*unit; // rescale time
-    myfile >> weight;
-    myfile >> temperature;
-    myfile >> humidity;
-    cerr << "i=" << i << ": " << time << " " 
-                              << weight << " "
-                              << temperature << " "
-                              << humidity << endl;
-    nt_data->Fill(time,weight,temperature,humidity);
+  // if acquisition has been already done, skips the scan of document
+  if(ACQUISITION_DONE){
+    for (int i =0; i<lines; i++){
+      nt_data->Fill(x[i],y[i],T[i],hum[i]);
+    }
+  } else {
+    // open the file and uses temporary variables
+    using namespace std;
+    ifstream myfile(filename);
+    string temp;
+    for (int i=0; i< headlines; i++){
+      getline(myfile, temp);
+    }
+    float time, weight, temperature, humidity;
+    for(int i=0; i<lines; i++){
+      time = i*unit; // rescale time
+      myfile >> weight;
+      myfile >> temperature;
+      myfile >> humidity;
+      cerr << "i=" << i << ": " << time << " " 
+        << weight << " "
+        << temperature << " "
+        << humidity << endl;
+      nt_data->Fill(time,weight,temperature,humidity);
+    }
   }
 }
 
@@ -204,6 +229,7 @@ void datafile::plot_elab()
 // N: every N points, a mean-point is produced
 void datafile::fill_mean(int N)
 {
+  if(!ACQUISITION_DONE) fill_data(unit);
   using namespace std;
   int npoints = float(lines/N);
   n_elab = npoints;
@@ -223,6 +249,43 @@ void datafile::fill_mean(int N)
   gr_elab = new TGraph (n_elab, x_elab, y_elab);	
 }
 
+map<float,float> datafile::find_max_weight()
+{
+  if(!ACQUISITION_DONE) fill_data(unit);
+  using namespace std;
+  fill_mean(20);
+  map<float,float> max_map;
+  float der1 = 0;
+  float der2;
+  int counter = 0;
+  // ranges over mean points
+  for(int i=0; i<n_elab; ++i){
+    der2 = y_elab[i+1] - y_elab[i];
+    if(der1*der2<0) ++counter;
+    if(counter>10){
+      max_map.insert(pair<float,float>(x_elab[i],y_elab[i]));
+      counter = 0;
+    }
+    der1 = der2;
+  }
+  return max_map;
+}
+
+void datafile::fill_graph_weight_max()
+{
+  using namespace std;
+  map<float,float> max_map = find_max_weight();
+  int n_max = max_map.size();
+  float * t = new float[n_max];
+  float * w = new float[n_max];
+  // scans the map, filling the two arrays
+  for(map<float,float>::iterator it=max_map.begin(); it!=max_map.end(); ++it){
+    int i = std::distance(max_map.begin(),it);
+    t[i] = it->first;
+    w[i] = it->second;
+  }
+  gr_weight_max = new TGraph(n_max,t,w);
+}
 
 
 //assumes the first point as the real one
@@ -255,24 +318,39 @@ void datafile::clean_quad()
 }
 
 
-// fills gr_der with derivative
-double datafile::get_derivative()
-{
 
+
+// fills gr_der with derivative
+double datafile::get_weight_derivative()
+{
   double d_mean = 0; 
   dy = new float[lines];
   dy[0] = 0;
   h_der = new TH1F("h_der","derivative distribution",1000,-0.01,0.01);
-  for(int i=1; i<lines; ++i){
+  for(int i=0; i<lines; ++i){
+    if(i==0) dy[i] = 0;
     dy[i] = (y[i] - y[i-1]);//unit;
     d_mean += dy[i];
-    //cerr << dy[i] << endl;
     h_der->Fill(dy[i]);
   }
-  gr_der = new TGraph(lines,x,dy);
-  gr_der->Draw();
+  gr_weight_der = new TGraph(lines,x,dy);
   return d_mean/lines;
 }
+
+double datafile::get_temperature_derivative()
+{
+  double d_mean = 0; 
+  dT = new float[lines];
+  dT[0] = 0;
+  for(int i=0; i<lines; ++i){
+    if(i==0) dT[i]=0;
+    dT[i] = (T[i] - T[i-1]);//unit;
+    d_mean += dT[i];
+  }
+  gr_temper_der = new TGraph(lines,x,dT);
+  return d_mean/lines;
+}
+
 
 
 
@@ -298,6 +376,7 @@ void plot_mean(string NAME, float UNIT=1, int NMEAN=5)
   mydata.fill_mean(NMEAN);
   mydata.plot_elab();
 }
+
 
 
 //////////////////////

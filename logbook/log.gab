@@ -238,3 +238,16 @@ Raccolta dati durata una settimana (fatta ripartire perche' ci avevano messo un 
 Inizio a fare analisi dati: rimetto in sesto machine.cxx, visto che ora root va; uso le TNtuple, scoprendo cose interessanti mentre cerco di farle funzionare
 - si potrebbe fare un'analisi dati statistica guardando l'istogramma: c'e' un bel picco per il peso vero
 Noto stranezze, guardo i dati: ci sono righe strambe e le sostituisco con 0 0 0
+
+171011
+I dati non mostrano un trend peso-temperatura molto netto.
+Ho provato a lavorare sui massimi, ma questo richiede di migliorare la parte di medie. Un altro approccio puo' essere quello di guardare i trend (sempre sulle medie) delle derivate, per vedere se temperatura e peso hanno senso insieme.
+PROSSIMI STEP:
+- creare macro che 
+    -- apra il file
+    -- prenda i dati
+    -- faccia le medie
+    -- prepari i grafici delle medie
+    -- trovi le derivate delle medie
+    -- prepari i grafici delle derivate 
+- confrontare derivate delle medie di temperatura-peso
