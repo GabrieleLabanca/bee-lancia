@@ -1,0 +1,121 @@
+\documentclass{beamer}
+\usetheme{AnnArbor}
+\title%[Crisis] % (optional, only for long titles)
+{Dispositivo per pesatura arnie}
+\subtitle{Configurazione con celle di carico}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%\begin{frame}
+%\frametitle{Table of Contents}
+%\tableofcontents[currentsection]
+%\end{frame}
+
+
+\section{Prime prove}
+\begin{frame}
+  \frametitle{Circuito e celle di carico}
+  \begin{columns}[c] % the "c" option specifies center vertical alignment
+    \column{.5\textwidth} % column designated by a command
+      \includegraphics[height=4.5cm]{../Foto/Prime_prove/circuito.png}
+    \column{.5\textwidth}
+      \includegraphics[height=4.5cm]{../Foto/Prime_prove/circuito_in_funzione.png}
+  \end{columns}
+\end{frame}
+\begin{frame}
+  \frametitle{Primi risultati}
+  \includegraphics[width=11cm]{../Foto/Prime_prove/primi_risultati}
+\end{frame}
+
+\section{Saldatura e stabilit\`a}
+\begin{frame}
+  \frametitle{Saldatura}
+  \begin{columns}[c] 
+    \column{.5\textwidth} 
+      \begin{itemize}
+        \item la stabilit\`a migliora
+        \item restano oscillazioni durante una giornata
+      \end{itemize}
+    \column{.5\textwidth}
+      \includegraphics[height=5cm]{../../analisi_dati/background/0kg_24h}   
+   \end{columns}
+\end{frame}
+\begin{frame}{Comportamento parabolico}
+  \begin{columns}[c] 
+    \column{.5\textwidth} 
+      \begin{itemize}
+        \item un fit conferma l'intuizione (buon chi2)
+        \item possibile criterio per pulire i dati
+      \end{itemize}
+    \column{.5\textwidth}
+      \includegraphics[height=5cm]{../../analisi_dati/background/0kg_parabola}   
+   \end{columns}
+\end{frame}
+\begin{frame}{Stabilit\`a}
+  \begin{columns}[c]
+    \column{.5\textwidth}
+      \large{60 ore, peso variato}
+      \includegraphics[height=5cm]{../../analisi_dati/background/60h}
+    \column{.5\textwidth}
+      \large{8 giorni, peso fissato}
+      \\\small{(scarto di 120g)}
+      \includegraphics[height=5cm]{../../analisi_dati/background/8gg}
+    \end{columns}
+\end{frame}
+
+\section{Misure di temperatura}
+\begin{frame}{Sensore DHT11}
+  \begin{columns}[c] 
+    \column{.1\textwidth}
+    \column{.5\textwidth} 
+      misure di 
+      \begin{itemize}
+        \item temperatura
+        \item umidit\`a
+      \end{itemize}
+    \column{.4\textwidth}
+      \includegraphics[height=5cm]{../Foto/DHT11}
+   \end{columns}
+\end{frame}
+\begin{frame}{Risultati complessivi}
+  \begin{columns}[c] 
+    \column{.5\textwidth} 
+      correlazioni tra temperatura e peso?
+    \column{.5\textwidth}
+      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/all_tot}   
+   \end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Example of columns 2}
+\begin{columns}[T] % contents are top vertically aligned
+\begin{column}[T]{5cm} % each column can also be its own environment
+Contents of first column \\ split into two lines
+\end{column}
+\begin{column}[T]{5cm} % alternative top-align that's better for graphics
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+
+\begin{block}{This is a Block}
+This is important information
+\end{block}
+
+\begin{alertblock}{This is an Alert block}
+This is an important alert
+\end{alertblock}
+
+\begin{exampleblock}{This is an Example block}
+This is an example 
+\end{exampleblock}
+
+\end{frame}
+
+\end{document}
