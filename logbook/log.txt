@@ -251,3 +251,13 @@ PROSSIMI STEP:
     -- trovi le derivate delle medie
     -- prepari i grafici delle derivate 
 - confrontare derivate delle medie di temperatura-peso
+
+
+
+171017
+Ok, lavoriamo alla macro. NB dovro' normalizzare!
+Ho risolto con comode TNtuple: ora il costruttore fa tutto e riempie le TNtuple, per
+- dati puri
+- derivata
+- media
+Parametri per il costruttore: file, unita', numero di punti per la media
