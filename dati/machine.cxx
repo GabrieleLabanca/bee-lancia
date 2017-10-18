@@ -77,6 +77,9 @@ Datafile::Datafile(string filestring, float myunit = 1, int n_mean = 10):
   fill_ntuple();
   fill_ntuple_der();
   fill_ntuple_mean();
+  nt_data->SetMarkerStyle(7);
+  nt_mean->SetMarkerStyle(7);
+  nt_der->SetMarkerStyle(7);
 }
 
 // performs a count of headlines and effective lines
@@ -118,11 +121,6 @@ void Datafile::fill_data(float unit)
     x[i] = i*unit; // rescale x
     myfile >> y[i] >> T[i] >> hum[i];
   }
-  /* //OLD
-  gr_raw = new TGraph (lines, x, y);
-  gr_weight_raw = new TGraph (lines, x, y);
-  gr_temper_raw = new TGraph (lines, x, T);
-  */
 
   ACQUISITION_DONE = 1;
 }
@@ -173,20 +171,22 @@ void Datafile::fill_mean(int N)
   T_elab   = new float[npoints];
   hum_elab = new float[npoints];
   float temp_sum[3] = {0,0,0};
+  int index;
   int ireal = 0; //counts from 0 to lines
-  for(int index=0; index<npoints; index++){ //counts the points in _elab
+  for(index=0; index<npoints; index++){ //counts the points in _elab
     for(int i=0; i<N; i++){ //counts the points over which mean is taken
       temp_sum[0] += y[ireal];
       temp_sum[1] += T[ireal];
       temp_sum[2] += hum[ireal];
       ++ireal;
     }
-    x_elab[index] = N*(index+1./2);
+    x_elab[index] = N*(index+1./2)*unit;
     y_elab[index] = temp_sum[0]/float(N);
     T_elab[index] = temp_sum[1]/float(N);
     hum_elab[index] = temp_sum[2]/float(N);
     temp_sum[0]=temp_sum[1]=temp_sum[2]=0;
   }
+  cerr << "@@@ LAST INDEX : " << index << endl;
 }
 
 void Datafile::fill_derivative()

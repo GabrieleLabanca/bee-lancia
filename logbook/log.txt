@@ -261,3 +261,20 @@ Ho risolto con comode TNtuple: ora il costruttore fa tutto e riempie le TNtuple,
 - derivata
 - media
 Parametri per il costruttore: file, unita', numero di punti per la media
+
+171018
+Tenendo conto solo dei dati prima/dopo il drop ~125, si notano correlazioni chiare tra temperatura e peso: Pesatura_Arnie/analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first.pdf e -second.pdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+

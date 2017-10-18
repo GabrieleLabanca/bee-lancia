@@ -1,5 +1,7 @@
 \documentclass{beamer}
 \usetheme{AnnArbor}
+\usecolortheme{crane}
+
 \title%[Crisis] % (optional, only for long titles)
 {Dispositivo per pesatura arnie}
 \subtitle{Configurazione con celle di carico}
@@ -80,11 +82,21 @@
    \end{columns}
 \end{frame}
 \begin{frame}{Risultati complessivi}
+  correlazioni tra temperatura e peso? (periodicit\`a)
   \begin{columns}[c] 
     \column{.5\textwidth} 
-      correlazioni tra temperatura e peso?
+      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/M_Weight}
     \column{.5\textwidth}
-      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/all_tot}   
+      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/M_Temperature}   
+   \end{columns}
+\end{frame}
+\begin{frame}{Correlazione temperatura-peso}
+  prima/dopo la caduta
+  \begin{columns}[c] 
+    \column{.5\textwidth} 
+      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/Weight:Temperature_timed_first}
+    \column{.5\textwidth}
+      \includegraphics[height=5cm]{../../analisi_dati/background/171010_long_sd_temp/Weight:Temperature_timed_second}
    \end{columns}
 \end{frame}
 
