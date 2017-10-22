@@ -265,9 +265,15 @@ Parametri per il costruttore: file, unita', numero di punti per la media
 171018
 Tenendo conto solo dei dati prima/dopo il drop ~125, si notano correlazioni chiare tra temperatura e peso: Pesatura_Arnie/analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first.pdf e -second.pdf
 
+Finita la presentazione per la riunione di domani.
 
 
-
+171022
+(Nei giorni scorsi e oggi)
+Setup del NodeMCU per leggere temperatura e umidita', con trasferimento dati su ThingSpeak.
+Ricostruzione del circuito con il NodeMCU, con anche le celle.
+Problema: SOFT WDT RESET. Internet parla di resistenze da mettere sul VCC, ma anche di problemi di delay. Sta di fatto che pare risolto con un piccolo delay trale acquisizioni iniziali dall'HX711.
+Ora faro' partire tutto e vediamo.
 
 
 
