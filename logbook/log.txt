@@ -276,9 +276,15 @@ Problema: SOFT WDT RESET. Internet parla di resistenze da mettere sul VCC, ma an
 Ora faro' partire tutto e vediamo.
 
 
+171102
+Un po' indietro con gli aggiornamenti.
+Dopo la presentazione del progetto a Re.Te., e' stato proposto di usarlo all'inaugurazione dell'Arsenale della Terra, il 16 novembre. Per quella data, Roberto preparera' la base (gia' pronta) e un pannello solare (!), mentre io mi occupero' di collegarci i sensori e predisporre i dati su ThingSpeak.
+Al momento, due questioni:
+1 - URGENTE: far funzionare i NodeMCU, che dopo il cambio di dispositivo fanno le bizze (software)
+2 - analisi dati implementata su NodeMCU
 
-
-
+171104
+Punto 1 non risolto neanche reinstallando l'IDE. Mentre ci penso, provo a implementare l'analisi dati in una funzione di root.
 
 
 

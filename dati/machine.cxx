@@ -5,6 +5,7 @@
 class Datafile
 {  
   public:
+
     // constructor
     Datafile(string,float,int);
 
@@ -29,9 +30,13 @@ class Datafile
     TNtuple* nt_der  = new TNtuple("nt_der",
         "derivative of data",
         "Time:Weight:Temperature:Humidity");
+    TNtuple* nt_clean = new TNtuple("nt_clean",
+        "mean data after cleaning",
+        "Time:Weight:Temperature:Humidity");
     void fill_ntuple();
     void fill_ntuple_mean();
     void fill_ntuple_der();
+    void fill_ntuple_clean();
 
     float unit; // to rescale i.e. the time
     /* EXAMPLE: acquisition every minute 
@@ -40,6 +45,7 @@ class Datafile
     bool ACQUISITION_DONE = 0; // set to 1 the first time file is scanned 
     bool MEAN_DONE = 0; // set to 1 the first time mean is calculated 
     bool DERIVATIVE_DONE = 0; // set to 1 the first time derivative is calculated
+    bool CLEAN_DONE = 0; // set to 1 the first time cleaning is done
 
     // actual data
     float * x;
@@ -59,7 +65,20 @@ class Datafile
     float * T_elab;
     float * hum_elab;
 
+    // CLEAN DATAa
+    // fit parameters (TODO get them from direct data?)
+    float m = 0.021; // mean from two "rows" of data
+    float sigma = 1.5; //by trial and error
+    float * y_clean;
+    void clean_data();
+    TH1F * h_delta = new TH1F("h_delta",
+        "histogram of clean data Delta2",
+        100,0,10);
+    TH1F * h_clean = new TH1F("h_clean",
+        "histogram of clean data",
+        1000,-10,10);
 
+    // file parameters
     const char * filename;// name of the file to read from
     int headlines, lines; // to be set by count_lines()
     void count_lines();   // counts actual lines vs. header lines ("# ...") 
@@ -77,9 +96,11 @@ Datafile::Datafile(string filestring, float myunit = 1, int n_mean = 10):
   fill_ntuple();
   fill_ntuple_der();
   fill_ntuple_mean();
+  fill_ntuple_clean();
   nt_data->SetMarkerStyle(7);
   nt_mean->SetMarkerStyle(7);
   nt_der->SetMarkerStyle(7);
+  nt_clean->SetMarkerStyle(7);
 }
 
 // performs a count of headlines and effective lines
@@ -139,7 +160,6 @@ void Datafile::fill_ntuple()
 
 void Datafile::fill_ntuple_mean()
 {
-  // if acquisition has been already done, skips the scan of document
   if(!MEAN_DONE){ fill_mean(n_mean); }
   for (int i =0; i<n_elab; i++){  // different index from data!
     nt_mean->Fill(x_elab[i],y_elab[i],T_elab[i],hum_elab[i]);
@@ -148,10 +168,18 @@ void Datafile::fill_ntuple_mean()
 
 void Datafile::fill_ntuple_der()
 {
-  // if acquisition has been already done, skips the scan of document
   if(!DERIVATIVE_DONE){ fill_derivative(); }
   for (int i =0; i<lines; i++){
     nt_der->Fill(x[i],dy[i],dT[i],dhum[i]);
+  }
+}
+
+void Datafile::fill_ntuple_clean()
+{
+  if(!CLEAN_DONE){ clean_data(); }
+  for (int i =0; i<n_elab; i++){
+    nt_clean->Fill(x_elab[i],y_clean[i],T_elab[i],hum_elab[i]);
+    h_clean->Fill(y_clean[i]);
   }
 }
 
@@ -186,7 +214,6 @@ void Datafile::fill_mean(int N)
     hum_elab[index] = temp_sum[2]/float(N);
     temp_sum[0]=temp_sum[1]=temp_sum[2]=0;
   }
-  cerr << "@@@ LAST INDEX : " << index << endl;
 }
 
 void Datafile::fill_derivative()
@@ -207,4 +234,50 @@ void Datafile::fill_derivative()
   DERIVATIVE_DONE = 1;
 }
 
-
+void Datafile::clean_data()
+{
+  if(!MEAN_DONE){ fill_mean(n_mean); }
+  if(!DERIVATIVE_DONE){ fill_derivative(); }
+  y_clean = new float[n_elab];
+  int n_before_drop = 100;
+  int counter = 0;
+  int prev = 0;
+  for(int p=0; p<n_elab; ++p){
+    y_clean[p] = 4;
+  }
+  for(int i=0; i<n_elab; ++i){ //Loop over mean data
+    /*  now I assume that x[0] is a 'good' point, i.e. it serves to tare
+     *  the weight-temperature dependence.
+     *  Is this substeinable when we introduce a variable weight?
+     *  Indeed, sometimes weight scale has to be re-tared, but understanding when
+     *  this appens can be difficult, if I have effects added to the zero-weight 
+     *  'broken' line.
+     *  Another approach can be to ignore the re-taring, hoping that it works. 
+     *  I must think more over that.
+     */
+    // this Delta2 is by weight alone, BUT I am using temperature here...
+    //float Delta2 = (y_elab[prev]-y_elab[i])*(y_elab[prev]-y_elab[i]); 
+    float Delta2 = y_elab[i] - y_elab[prev] + m*(i-prev);
+    h_delta->Fill(Delta2);
+    Delta2 = sqrt(Delta2*Delta2);
+    if( Delta2 > sigma){ 
+      ++counter;
+      //cerr << "over sigma" << endl;
+    }
+    if(counter > n_before_drop || i+1==n_elab){ //TODO DEBUG
+      cerr << "counter " << counter 
+        << "and index " << i << endl;
+      i -= n_before_drop; // back to good ones
+      cerr << "Row begins here: " << i << endl;
+      for(int j=prev; j<i; ++j){ // "clean" data from prev to i
+        y_clean[j] = y_elab[j];// - y_elab[prev] - m*(j-prev);
+      }
+      //cerr << "Points in a row: " << i-prev << endl;
+      prev = i; // new beginning of row
+      counter = 0;
+      //continue; // back to beginning of loop: new set of points
+    }
+    cerr << "counter " << counter << endl;
+  }
+  CLEAN_DONE = true;
+}
