@@ -1,0 +1,20 @@
+M_Temperature.pdf        
+  Mean Temperature
+Weight.pdf
+  Raw Weight
+M_Weight.pdf
+  Mean Weight
+Weight:Temperature.pdf
+  (Raw) Weight in function of Temperature
+Weight_clean_with_T.pdf  
+  Mean weight (black) and Clean Weight (red), fitted in the first half of data
+  Cleaning has been done considering an approximed drivative 
+    of Weight in function of the Temperature
+  An improvement in chi2, mean value of the fit, and by naked eye can be seen
+Weight:Temperature_timed_first.pdf
+  (Raw) Weight in function of Temperature: first half of data
+Weight:Humidity.pdf      
+  (raw) Weight in function of humidity
+Weight:Temperature_timed_second.pdf
+  (Raw) Weight in function of Temperature: second half of data
+

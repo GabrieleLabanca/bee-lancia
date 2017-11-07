@@ -68,7 +68,7 @@ class Datafile
     // CLEAN DATAa
     // fit parameters (TODO get them from direct data?)
     float m = 0.021; // mean from two "rows" of data
-    float sigma = 1.5; //by trial and error
+    float sigma = 1.5; //by trial and error TODO improve
     float * y_clean;
     void clean_data();
     TH1F * h_delta = new TH1F("h_delta",
@@ -257,27 +257,23 @@ void Datafile::clean_data()
      */
     // this Delta2 is by weight alone, BUT I am using temperature here...
     //float Delta2 = (y_elab[prev]-y_elab[i])*(y_elab[prev]-y_elab[i]); 
-    float Delta2 = y_elab[i] - y_elab[prev] + m*(i-prev);
+    float Delta2 = y_elab[i] - y_elab[prev] - m*(T_elab[i]-T_elab[prev]); 
     h_delta->Fill(Delta2);
     Delta2 = sqrt(Delta2*Delta2);
     if( Delta2 > sigma){ 
       ++counter;
-      //cerr << "over sigma" << endl;
     }
-    if(counter > n_before_drop || i+1==n_elab){ //TODO DEBUG
-      cerr << "counter " << counter 
-        << "and index " << i << endl;
-      i -= n_before_drop; // back to good ones
-      cerr << "Row begins here: " << i << endl;
+    bool is_drop = (counter > n_before_drop);
+    bool is_end  = (i+1==n_elab);
+    if( is_drop  or is_end ){ 
+      if(is_drop){ i -= n_before_drop; }// back to good ones
       for(int j=prev; j<i; ++j){ // "clean" data from prev to i
-        y_clean[j] = y_elab[j];// - y_elab[prev] - m*(j-prev);
+        y_clean[j] = y_elab[j] - y_elab[prev] - m*(T_elab[j]-T_elab[prev]);
       }
-      //cerr << "Points in a row: " << i-prev << endl;
       prev = i; // new beginning of row
       counter = 0;
-      //continue; // back to beginning of loop: new set of points
     }
-    cerr << "counter " << counter << endl;
+    if(i+1==(n_elab)) cerr << "i " << i << endl;
   }
   CLEAN_DONE = true;
 }

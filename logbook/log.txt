@@ -286,7 +286,10 @@ Al momento, due questioni:
 171104
 Punto 1 non risolto neanche reinstallando l'IDE. Mentre ci penso, provo a implementare l'analisi dati in una funzione di root.
 
+171105
+Punto 2: il programma funziona, ma non fa quello che mi aspettavo: peggiora la pendenza. 
 
 
-
-
+171107
+punto 2: il programma funziona! Ancora TODO la sigma, da migliorare
+cfr. analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf
