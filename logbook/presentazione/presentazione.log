@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.17)  18 OCT 2017 22:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.17)  8 NOV 2017 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,7 +892,7 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<../Foto/Prime_prove/circuito.png, id=64, 963.6pt x 542.025pt>
+<../Foto/Prime_prove/circuito.png, id=68, 963.6pt x 542.025pt>
 File: ../Foto/Prime_prove/circuito.png Graphic file (type png)
 
 <use ../Foto/Prime_prove/circuito.png>
@@ -913,7 +913,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 28.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../Foto/Prime_prove/circuito_in_funzione.png, id=65, 963.6pt x 542.025pt>
+<../Foto/Prime_prove/circuito_in_funzione.png, id=69, 963.6pt x 542.025pt>
 File: ../Foto/Prime_prove/circuito_in_funzione.png Graphic file (type png)
 
 <use ../Foto/Prime_prove/circuito_in_funzione.png>
@@ -929,7 +929,7 @@ Overfull \hbox (56.47466pt too wide) in paragraph at lines 28--28
 
  <../Foto/Prime_prove/circuito.png (PNG copy)> <../Foto/Prime_prove/circuito_in
 _funzione.png (PNG copy)>]
-<../Foto/Prime_prove/primi_risultati.png, id=94, 963.6pt x 542.025pt>
+<../Foto/Prime_prove/primi_risultati.png, id=98, 963.6pt x 542.025pt>
 File: ../Foto/Prime_prove/primi_risultati.png Graphic file (type png)
 
 <use ../Foto/Prime_prove/primi_risultati.png>
@@ -939,7 +939,7 @@ line 32.
  [3
 
  <../Foto/Prime_prove/primi_risultati.png (PNG copy)>]
-<../../analisi_dati/background/0kg_24h.pdf, id=123, 569.12625pt x 452.69125pt>
+<../../analisi_dati/background/0kg_24h.pdf, id=127, 569.12625pt x 452.69125pt>
 File: ../../analisi_dati/background/0kg_24h.pdf Graphic file (type pdf)
 
 <use ../../analisi_dati/background/0kg_24h.pdf>
@@ -954,7 +954,7 @@ Overfull \hbox (7.70255pt too wide) in paragraph at lines 46--46
 [4
 
  <../../analisi_dati/background/0kg_24h.pdf, page is rotated 90 degrees>]
-<../../analisi_dati/background/0kg_parabola.pdf, id=197, 569.12625pt x 452.6912
+<../../analisi_dati/background/0kg_parabola.pdf, id=201, 569.12625pt x 452.6912
 5pt>
 File: ../../analisi_dati/background/0kg_parabola.pdf Graphic file (type pdf)
  <use ../../analisi_dati/background/0kg_parabola.pdf>
@@ -969,7 +969,7 @@ Overfull \hbox (7.70255pt too wide) in paragraph at lines 57--57
 [5
 
  <../../analisi_dati/background/0kg_parabola.pdf, page is rotated 90 degrees>] 
-<../../analisi_dati/background/60h.pdf, id=267, 569.12625pt x 452.69125pt>
+<../../analisi_dati/background/60h.pdf, id=271, 569.12625pt x 452.69125pt>
 File: ../../analisi_dati/background/60h.pdf Graphic file (type pdf)
 
 <use ../../analisi_dati/background/60h.pdf>
@@ -981,7 +981,7 @@ Overfull \hbox (7.70255pt too wide) in paragraph at lines 68--68
 []  
  []
 
-<../../analisi_dati/background/8gg.pdf, id=268, 682.55pt x 652.4375pt>
+<../../analisi_dati/background/8gg.pdf, id=272, 682.55pt x 652.4375pt>
 File: ../../analisi_dati/background/8gg.pdf Graphic file (type pdf)
 
 <use ../../analisi_dati/background/8gg.pdf>
@@ -992,7 +992,7 @@ ne 68.
 
  <../../analisi_dati/background/60h.pdf, page is rotated 90 degrees> <../../ana
 lisi_dati/background/8gg.pdf>]
-<../Foto/DHT11.jpg, id=348, 14.30946pt x 24.355pt>
+<../Foto/DHT11.jpg, id=352, 14.30946pt x 24.355pt>
 File: ../Foto/DHT11.jpg Graphic file (type jpg)
  <use ../Foto/DHT11.jpg>
 Package pdftex.def Info: ../Foto/DHT11.jpg used on input line 83.
@@ -1001,7 +1001,7 @@ Package pdftex.def Info: ../Foto/DHT11.jpg used on input line 83.
 [7
 
  <../Foto/DHT11.jpg>]
-<../../analisi_dati/171010_long_sd_temp/M_Weight.pdf, id=377, 569.12625pt x 386
+<../../analisi_dati/171010_long_sd_temp/M_Weight.pdf, id=383, 569.12625pt x 386
 .44376pt>
 File: ../../analisi_dati/171010_long_sd_temp/M_Weight.pdf Graphic file (type pd
 f)
@@ -1015,7 +1015,7 @@ Overfull \hbox (17.41144pt too wide) in paragraph at lines 92--92
  []
 
 
-<../../analisi_dati/171010_long_sd_temp/M_Temperature.pdf, id=378, 569.12625pt 
+<../../analisi_dati/171010_long_sd_temp/M_Temperature.pdf, id=384, 569.12625pt 
 x 386.44376pt>
 File: ../../analisi_dati/171010_long_sd_temp/M_Temperature.pdf Graphic file (ty
 pe pdf)
@@ -1034,7 +1034,7 @@ Overfull \hbox (17.41144pt too wide) in paragraph at lines 92--92
 es> <../../analisi_dati/171010_long_sd_temp/M_Temperature.pdf, page is rotated 
 90 degrees>]
 <../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first.pdf, id=
-492, 569.12625pt x 384.43625pt>
+499, 569.12625pt x 384.43625pt>
 File: ../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first.pdf
  Graphic file (type pdf)
 
@@ -1049,7 +1049,7 @@ Overfull \hbox (18.40143pt too wide) in paragraph at lines 101--101
 
 
 <../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_second.pdf, id
-=493, 569.12625pt x 384.43625pt>
+=500, 569.12625pt x 384.43625pt>
 File: ../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_second.pd
 f Graphic file (type pdf)
 
@@ -1067,7 +1067,36 @@ Overfull \hbox (18.40143pt too wide) in paragraph at lines 101--101
 
  <../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first.pdf, pa
 ge is rotated 90 degrees> <../../analisi_dati/171010_long_sd_temp/Weight:Temper
-ature_timed_second.pdf, page is rotated 90 degrees>] [10
+ature_timed_second.pdf, page is rotated 90 degrees>]
+<../../analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf, id=613, 569.12
+625pt x 384.43625pt>
+File: ../../analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf Graphic fi
+le (type pdf)
+
+<use ../../analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf>
+Package pdftex.def Info: ../../analisi_dati/171010_long_sd_temp/Weight_clean_wi
+th_T.pdf used on input line 114.
+(pdftex.def)             Requested size: 189.54907pt x 128.0374pt.
+ [10
+
+ <../../analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf, page is rotat
+ed 90 degrees>]
+<../../logbook/presentazione/img/thingspeak_00.png, id=688, 1371.1225pt x 770.8
+8pt>
+File: ../../logbook/presentazione/img/thingspeak_00.png Graphic file (type png)
+
+ <use ../../logbook/presentazione/img/thingspeak_00.png>
+Package pdftex.def Info: ../../logbook/presentazione/img/thingspeak_00.png used
+ on input line 125.
+(pdftex.def)             Requested size: 278.3412pt x 156.49014pt.
+
+Overfull \hbox (4.50392pt too wide) in paragraph at lines 125--125
+[][]  
+ []
+
+[11
+
+ <../../logbook/presentazione/img/thingspeak_00.png>] [12
 
 ]
 \tf@nav=\write6
@@ -1079,42 +1108,40 @@ ature_timed_second.pdf, page is rotated 90 degrees>] [10
 \tf@snm=\write8
 \openout8 = `presentazione.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 139.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 139.
 
 (./presentazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 139.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 139.
+Package rerunfilecheck Info: File `presentazione.out' has not changed.
+(rerunfilecheck)             Checksum: FE674E1799AB30EF352674102888474F;215.
 
-
-Package rerunfilecheck Warning: File `presentazione.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `presentazione.out':
-(rerunfilecheck)             Before: 33F6FE4F9651894322456BE0AA46C7CD;161
-(rerunfilecheck)             After:  66B001801C3229C0A375C83E63BFB1C6;214.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 139.
  ) 
 Here is how much of TeX's memory you used:
- 16704 strings out of 494953
- 322720 string characters out of 6180976
+ 16742 strings out of 494953
+ 323672 string characters out of 6180976
  385280 words of memory out of 5000000
- 19561 multiletter control sequences out of 15000+600000
- 10870 words of font info for 40 fonts, out of 8000000 for 9000
+ 19590 multiletter control sequences out of 15000+600000
+ 11470 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  48i,17n,57p,412b,688s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb>
-Output written on presentazione.pdf (10 pages, 1957811 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on presentazione.pdf (12 pages, 2084743 bytes).
 PDF statistics:
- 655 PDF objects out of 1000 (max. 8388607)
- 435 compressed objects within 5 object streams
- 25 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 774 PDF objects out of 1000 (max. 8388607)
+ 520 compressed objects within 6 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

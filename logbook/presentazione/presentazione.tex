@@ -42,7 +42,7 @@
       \end{itemize}
     \column{.5\textwidth}
       \includegraphics[height=5cm]{../../analisi_dati/background/0kg_24h}   
-   \end{columns}
+  \end{columns}
 \end{frame}
 \begin{frame}{Comportamento parabolico}
   \begin{columns}[c] 
@@ -53,7 +53,7 @@
       \end{itemize}
     \column{.5\textwidth}
       \includegraphics[height=5cm]{../../analisi_dati/background/0kg_parabola}   
-   \end{columns}
+  \end{columns}
 \end{frame}
 \begin{frame}{Stabilit\`a}
   \begin{columns}[c]
@@ -64,7 +64,7 @@
       \large{8 giorni, peso fissato}
       \\\small{(scarto di 120g)}
       \includegraphics[height=5cm]{../../analisi_dati/background/8gg}
-    \end{columns}
+  \end{columns}
 \end{frame}
 
 \section{Misure di temperatura}
@@ -79,7 +79,7 @@
       \end{itemize}
     \column{.4\textwidth}
       \includegraphics[height=5cm]{../Foto/DHT11}
-   \end{columns}
+  \end{columns}
 \end{frame}
 \begin{frame}{Risultati complessivi}
   correlazioni tra temperatura e peso? (periodicit\`a)
@@ -88,7 +88,7 @@
       \includegraphics[height=4.5cm]{../../analisi_dati/171010_long_sd_temp/M_Weight}
     \column{.5\textwidth}
       \includegraphics[height=4.5cm]{../../analisi_dati/171010_long_sd_temp/M_Temperature}   
-   \end{columns}
+  \end{columns}
 \end{frame}
 \begin{frame}{Correlazione temperatura-peso}
   prima/dopo la caduta
@@ -97,10 +97,35 @@
       \includegraphics[height=4.5cm]{../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_first}
     \column{.5\textwidth}
       \includegraphics[height=4.5cm]{../../analisi_dati/171010_long_sd_temp/Weight:Temperature_timed_second}
-   \end{columns}
+  \end{columns}
+\end{frame}
+\begin{frame}{Pulizia dei dati}
+  \(w_{\mathrm{vero}}[i] = w_{\mathrm{misurato}}[i] - (w_0 + m*T[i])\)
+  \begin{columns}[c] 
+    \column{.4\textwidth} 
+      \begin{itemize}
+        \item "a occhio" meno oscillazione
+        \item fit con \(y=y_0\) resta pi\`u vicino al valore iniziale
+        \item \(\chi^2\) migliora di molto
+      \end{itemize}
+    \column{.6\textwidth}
+      \includegraphics[height=4.5cm]{../../analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf}
+  \end{columns}
 \end{frame}
 
-\section{Harware senza fili}
+\section{Hardware senza fili}
+\begin{frame}
+  \begin{columns}[c]
+    \column{.1\textwidth}
+    \column{.8\textwidth}
+    \Large{ThingSpeak.com}\\
+    \includegraphics[height=5.5cm]{../../logbook/presentazione/img/thingspeak_00.png}
+    \column{.1\textwidth}
+  \end{columns}
+\end{frame}
+
+
+
 \begin{frame}
   \Large{Prossimi step}
   \begin{itemize}
