@@ -21,20 +21,11 @@ HX711 scale;//(HX711_DOUT_PIN, HX711_SCK_PIN); // parameter "gain" omitted; defa
 
 // CONFIGURE WIFI
 #include <ESP8266WiFi.h>
-// CELL
-const char *ssid =  "gabgab";     // replace with your wifi ssid and wpa2 key
-const char *pass =  "12345678";
-/*// TELECOM
 const char *ssid =  "Telecom-58120441";     // replace with your wifi ssid and wpa2 key
 const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-*/
-/*// FASTWEB
-const char *ssid =  "FASTWEB-1-0D2259";     // replace with your wifi ssid and wpa2 key
-const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-*/
-//const char* server = "api.thingspeak.com";
-//String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
-//WiFiClient client;
+const char* server = "api.thingspeak.com";
+String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
+WiFiClient client;
 
 
 //int step = 0;
@@ -53,23 +44,16 @@ void setup()
   Serial.println("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, pass);
-  int counter = 0;
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
     Serial.print(".");
-    //if(++counter > 30) break;
   }
   Serial.println("");
-  /*if(WiFi.status() == WL_CONNECTED){
-    Serial.println("WiFi connected");
-  } else {
-    Serial.println("No WiFi");
-  }
-  */
+  Serial.println("WiFi connected");
  
-
 /*
+
   // SETUP HX711
   scale.begin(D2,D1);
   scale.power_up();
@@ -98,8 +82,8 @@ void setup()
   delay(15);
   // print the average of 5 readings from the ADC minus tare weight,
   //divided by the SCALE parameter set with set_scale
-*/
 
+*/
 }
 
 void loop()
@@ -113,11 +97,9 @@ void loop()
   float h = dht.readHumidity();
   if (isnan(weight)) {
     Serial.println("ERROR READING from HX711!");
-    blink(10);
     return;
   }
 
-  blink(1);
   Serial.print("Weight: ");
   Serial.print(weight, 3); //tara con 3.870kg
   Serial.print(' ');
@@ -125,11 +107,8 @@ void loop()
   Serial.print(t);
   Serial.print(" degrees Celsius, Humidity: ");
   Serial.print(h);
-  Serial.print('\n');
-*/
-
-  /*
   Serial.println("%. Send to Thingspeak.");
+
   if (isnan(t) || isnan(h))
   {
     Serial.println("Failed to read from DHT sensor!");
@@ -159,24 +138,12 @@ void loop()
 
   }
   client.stop();
-  */
-/*
+  
+
   Serial.println("Waiting...");
 
   // thingspeak needs minimum 15 sec delay between updates
   delay(15000);
   */
-  
 }
-
-/*
-void blink(int N){
-  for(int i=0; i<N; ++i){
-    digitalWrite(LED_BUILTIN, HIGH);   
-    delay(500);                   
-    digitalWrite(LED_BUILTIN, LOW);  
-    delay(1000);
-  }
-}
-*/
 

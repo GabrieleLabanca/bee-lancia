@@ -293,3 +293,20 @@ Punto 2: il programma funziona, ma non fa quello che mi aspettavo: peggiora la p
 171107
 punto 2: il programma funziona! Ancora TODO la sigma, da migliorare
 cfr. analisi_dati/171010_long_sd_temp/Weight_clean_with_T.pdf
+
+171112
+Le soddisfazioni del lato analisi dati sono compensate dalla frustrazione del lato hardware:
+il NodeMCU con la libreria Wifi non funziona niente bene, o meglio un po' funziona, un po' no, a seconda di quali linee commento!
+Scrivo un thread su http://www.esp8266.com, sperando di avere qualche risposta...
+
+171114
+Provo a sostituire il porting del NodeMCU:
+da http://arduino.esp8266.com/stable/package_esp8266com_index.json
+a http://arduino.esp8266.com/versions/2.3.0/package_esp8266com_index.json
+(suggerimento dal forum, di Narfel)
+In ogni caso NON FUNZIONA, non era quello il problema. Ma e' stato utile: mi ha ricordato di escludere le librerie del DHT11 e del HX711.
+Non resta che imparare il Lua... 
+
+Mentre scrivo la mail a Roberto, mi rendo conto che ho usato la SECONDA ESP... la PRIMA SEMBRA FUNZIONARE!
+Dissaldo e risaldo tutto...
+Niente, non va uguale. Gah.
