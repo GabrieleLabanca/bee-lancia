@@ -1,10 +1,10 @@
 ///////////////////
 // CONFIGURE HX711
 #include "HX711.h"//The library used for arduino  https://github.com/bogde/HX711
-// HX711.DOUT   - D2  (Arduino: 8 (BEFORE: pin 10))
-// HX711.PD_SCK - D1 (Arduino: 7 (BEFORE: pin 11))
-#define HX711_SCK_PIN  D1
-#define HX711_DOUT_PIN D2
+// HX711.DOUT   - D1  (Arduino: 8 (BEFORE: pin 10))
+// HX711.PD_SCK - D0 (Arduino: 7 (BEFORE: pin 11))
+#define HX711_SCK_PIN  D0
+#define HX711_DOUT_PIN D1
 //scale(DOUT,SCK)
 HX711 scale;//(HX711_DOUT_PIN, HX711_SCK_PIN); // parameter "gain" omitted; default value 128
 void setup()
@@ -15,7 +15,7 @@ void setup()
 
 
   // SETUP HX711
-  scale.begin(D2, D1);
+  scale.begin(D1, D0);
   scale.power_up();
   delay(1000);
   Serial.println("Before setting up the scale:");

@@ -2,7 +2,7 @@
 // CONFIGURE DHT11
 #include "DHT.h" // https://github.com/adafruit/DHT-sensor-library  NEEDS https://github.com/adafruit/Adafruit_Sensor
 #define DHTTYPE DHT11   // DHT 11
-#define DHT11_PIN D3 //signal pin (has to be digital)
+#define DHT11_PIN D2 //signal pin (has to be digital)
 DHT dht(DHT11_PIN, DHTTYPE);
 //DHT dht(DHTPIN, DHT11);
 
