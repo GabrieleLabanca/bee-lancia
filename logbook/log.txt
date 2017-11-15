@@ -310,3 +310,11 @@ Non resta che imparare il Lua...
 Mentre scrivo la mail a Roberto, mi rendo conto che ho usato la SECONDA ESP... la PRIMA SEMBRA FUNZIONARE!
 Dissaldo e risaldo tutto...
 Niente, non va uguale. Gah.
+
+171115
+Alla fine c'erano due soluzioni:
+_ Roberto mi dice: 
+  while (WiFi.localIP().toString() == "0.0.0.0") 
+_ https://stackoverflow.com/questions/43354086/nodemcu-esp8266-connecting-to-iphone-hotspot-with-c mi dice:
+  WiFi.mode(WIFI_STA);
+  while (WiFi.status() != WL_CONNECTED)
