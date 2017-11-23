@@ -10,7 +10,7 @@ void setup()
 {
   delay(1000);
   Serial.begin(9600);
-  Serial.println("BEGIN CONNECTION");
+  Serial.println("just_DHT11");
 }
 
 void loop()

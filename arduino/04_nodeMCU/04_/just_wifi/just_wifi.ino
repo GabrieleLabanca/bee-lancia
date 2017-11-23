@@ -1,19 +1,34 @@
 // CONFIGURE WIFI
-#include "ESP8266WiFi.h"
-// Toolbox
-const char *ssid =  "toolbox";
-const char *pass =  "Toolbox.Torino";
+#include <ESP8266WiFi.h>
+/*// CELL
+  const char *ssid =  "gabgab";     // replace with your wifi ssid and wpa2 key
+  const char *pass =  "12345678";
+*/
+// TELECOM
+const char *ssid =  "Telecom-58120441";     // replace with your wifi ssid and wpa2 key
+const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
+/*
+  // FASTWEB
+  const char *ssid =  "FASTWEB-1-0D2259";     // replace with your wifi ssid and wpa2 key
+  const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
+*/
+/*// Toolbox
+  const char *ssid =  "toolbox";
+  const char *pass =  "Toolbox.Torino";
+*/
+
 
 // CONFIGURE SERVER
 const char* server = "api.thingspeak.com";
 String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
 WiFiClient client;
 
+
 void setup()
 {
   delay(1000);
   Serial.begin(9600);
-  Serial.println("BEGIN CONNECTION");
+  Serial.println("JUST_WIFI");
 
   //SETUP WIFI
   Serial.println("Connecting to ");
@@ -29,30 +44,10 @@ void setup()
 
 void loop()
 {
-  // weight
-  float weight = scale.get_units();//* .005600966442953021;
-  // temperature
-  float t = dht.readTemperature();
-  // humidity
-  float h = dht.readHumidity();
-  if (isnan(weight)) {
-    Serial.println("ERROR READING from HX711!");
-    blink(10);
-    return;
-  }
-
-  blink(1);
-  Serial.print("Weight: ");
-  Serial.print(weight, 3); //tara con 3.870kg
-  Serial.print(' ');
-  Serial.print("Temperature: ");
-  Serial.print(t);
-  Serial.print(" degrees Celsius, Humidity: ");
-  Serial.print(h);
-  Serial.print('\n');
-*/
-
-  /*
+  
+  float weight = 10;
+  float t = 11;
+  float h = 12;
   Serial.println("%. Send to Thingspeak.");
   if (isnan(t) || isnan(h))
   {
@@ -84,5 +79,6 @@ void loop()
   }
   client.stop();
   delay(15000);
+  
 }
 

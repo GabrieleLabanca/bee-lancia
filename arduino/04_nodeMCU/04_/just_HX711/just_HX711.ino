@@ -11,7 +11,7 @@ void setup()
 {
   delay(1000);
   Serial.begin(9600);
-  Serial.println("BEGIN CONNECTION");
+  Serial.println("JUST_HX711");
 
 
   // SETUP HX711

@@ -320,3 +320,16 @@ _ https://stackoverflow.com/questions/43354086/nodemcu-esp8266-connecting-to-iph
   while (WiFi.status() != WL_CONNECTED)
 
 Risaldato sull'impalcatura per il pannello solare. Problemi nuovi: Soft WTD reset. Ci pensero'. Almeno senza pannello ora lavora.
+
+171121
+Dopo qualche giorno di problemi, ho finito di rivedere software e hardware.
+- il software aveva probabilmente qualche buggino, l'ho tolto copincollando di nuovo tutti i pezzi, dopo aver controllato che funzionassero
+- hardware: il 5V della shield non connetteva con le prese a vite, ho risolto facendo un "bypass" esterno; le prese a vite etichettate D1,D2,D3 sono in realta' D0,D1,D2, e' bastato rinominare tutto nei file .ino
+ORA FUNZIONA. Speriamo continui a farlo.
+
+171123
+Funziona. Quello: invece il low-power no. 
+Se collego RST e D0 (tra l'altro, ora dovro' cambiare il link a D0, che serve per questo) il Node si resetta, punto. Invece dovrebbe farlo solo quando il comando glielo dice.
+Roberto mi ha mandato una mail con il suggerimento di staccarlo dal cavo, mentre funziona. Quindi devo caricare la batteria, il che richiedera' tempo; intanto cerco ancora un po' su internet.
+# https://www.reddit.com/r/esp8266/comments/4p9012/nodemcu_board_sleep_tying_d0_and_rst_constantly/ dice di mettere D0 su HIGH, cosa che ho gia' provato ieri; ma non funziona ugualmente, dopo il primo reset setup() non viene chiamato.
+Mistero dei misteri, all'indirizzo http://www.esp8266.com/viewtopic.php?f=6&t=10524&sid=cc835d1021aef84ffce347bf946f5fcb&start=8 c'e' un codice che FUNZIONA. E non so perche'. Poche domande, va'. E' just_sleep_bbx10node

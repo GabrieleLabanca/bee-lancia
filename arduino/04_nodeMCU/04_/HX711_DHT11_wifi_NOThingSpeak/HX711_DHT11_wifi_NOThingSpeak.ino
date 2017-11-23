@@ -39,16 +39,17 @@ const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
 void setup()
 {
   // SETUP SERIAL
-  delay(1000);
-  Serial.begin(9600);
-  Serial.println("BEGIN CONNECTION");
+  delay(10);
+  Serial.begin(74880);
+  Serial.println("VERSION: HX711_DHT11_wifi_NOThingSpeak");
   
-  delay(1000);
+  delay(10);
   
   // SETUP HX711
   scale.begin(D2, D1);
+  delay(10);
   scale.power_up();
-  delay(1000);
+  delay(10);
   Serial.println("Before setting up the scale:");
   Serial.print("read: \t\t ");
   Serial.println(scale.read());     // print a raw reading from the ADC
