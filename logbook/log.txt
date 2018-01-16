@@ -333,3 +333,10 @@ Se collego RST e D0 (tra l'altro, ora dovro' cambiare il link a D0, che serve pe
 Roberto mi ha mandato una mail con il suggerimento di staccarlo dal cavo, mentre funziona. Quindi devo caricare la batteria, il che richiedera' tempo; intanto cerco ancora un po' su internet.
 # https://www.reddit.com/r/esp8266/comments/4p9012/nodemcu_board_sleep_tying_d0_and_rst_constantly/ dice di mettere D0 su HIGH, cosa che ho gia' provato ieri; ma non funziona ugualmente, dopo il primo reset setup() non viene chiamato.
 Mistero dei misteri, all'indirizzo http://www.esp8266.com/viewtopic.php?f=6&t=10524&sid=cc835d1021aef84ffce347bf946f5fcb&start=8 c'e' un codice che FUNZIONA. E non so perche'. Poche domande, va'. E' just_sleep_bbx10node
+
+
+171124
+INCREDIBILMENTE funziona: HX711_DHT11_wifi_low.ino
+C'e' la presa dati, ThingSpeak e il esp.deepSleep
+### TODO ###
+Quando c'e' il reset, la tara si ritara (appunto), quindi va trovato un modo di storare la tara precedente  -->> si potrebbe cogliere l'occasione per risolvere (forse) anche il problema degli sbalzi di tara, ritarando ogni tot, ma sapendo quanto deve venire

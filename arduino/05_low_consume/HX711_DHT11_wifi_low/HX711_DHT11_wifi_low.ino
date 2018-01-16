@@ -1,8 +1,8 @@
 ///////////////////
 // CONFIGURE HX711
 #include "HX711.h"//The library used for arduino  https://github.com/bogde/HX711
-// HX711.DOUT   - D1  (Arduino: 8 (BEFORE: pin 10))
-// HX711.PD_SCK - D0 (Arduino: 7 (BEFORE: pin 11))
+// HX711.DOUT     (Arduino: 8 (BEFORE: pin 10))
+// HX711.PD_SCK  (Arduino: 7 (BEFORE: pin 11))
 #define HX711_SCK_PIN  D1
 #define HX711_DOUT_PIN D2
 //scale(DOUT,SCK)
@@ -19,39 +19,42 @@ DHT dht(DHT11_PIN, DHTTYPE);
 // CONFIGURE WIFI
 #include <ESP8266WiFi.h>
 /*// CELL
-  const char *ssid =  "gabgab";  
+  const char *ssid =  "gabgab";     // replace with your wifi ssid and wpa2 key
   const char *pass =  "12345678";
 */
-/*
 // TELECOM
-const char *ssid =  "Telecom-58120441";     
+const char *ssid =  "Telecom-58120441";     // replace with your wifi ssid and wpa2 key
 const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-*/
 /*
   // FASTWEB
-  const char *ssid =  "FASTWEB-1-0D2259";     /
+  const char *ssid =  "FASTWEB-1-0D2259";     // replace with your wifi ssid and wpa2 key
   const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
 */
-// Arsenale della Terra
-  const char *ssid =  "dlink_DWR-730_2F6E";    
-  const char *pass =  "arsenaleterra2017";
+/*// Toolbox
+  const char *ssid =  "toolbox";
+  const char *pass =  "Toolbox.Torino";
+*/
 
 // CONFIGURE SERVER
 const char* server = "api.thingspeak.com";
 String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
 WiFiClient client;
 
+// LOW POWER
+#define SECONDS_DS(seconds)  ((seconds)*1000000UL)
+#define SERIAL_DEBUG (1)
+
+
 
 void setup()
 {
   delay(1000);
   Serial.begin(9600);
-  Serial.println("HX711_DHT11_wifi");
-
+  Serial.println("HX711_DHT11_wifi_low");
+  delay(1000);
 
   // SETUP HX711
   scale.begin(HX711_DOUT_PIN,HX711_SCK_PIN);
-  
   scale.power_up();
   delay(1000);
   Serial.println("Before setting up the scale:");
@@ -81,7 +84,7 @@ void setup()
 
   //SETUP WIFI
   Serial.println("Connecting to ");
-  Serial.println(ssid);  Serial.println("HX711_DHT11_wifi");
+  Serial.println(ssid);
   WiFi.begin(ssid, pass);
   while (WiFi.localIP().toString() == "0.0.0.0") //while (WiFi.status() != WL_CONNECTED)
   {
@@ -89,12 +92,15 @@ void setup()
     Serial.print(".");
   }
   Serial.println("WiFi connected");
-  //Serial.println("HX711_DHT11_wifi READY");
+
+  // ALERT!! to deep sleep
+  //Serial.println("\n\nCONNECT D0 WITH RST pin!!!!\n(ten seconds left!)\n");
+  //delay(10000);
 
 }
 void loop()
 {
-  // GET DATA  M
+  // GET DATA  
   // weight
   float weight = scale.get_units();//* .005600966442953021;
   Serial.print("Weight: ");
@@ -140,7 +146,11 @@ void loop()
 
   // DELAY
   Serial.print('\n');
+  //delay(1000);
   delay(60000);
+  //ESP.deepSleep(SECONDS_DS(10), WAKE_RF_DEFAULT);
+  // Execution resumes at the top of this function.
+  delay(100);
 }
 
 
