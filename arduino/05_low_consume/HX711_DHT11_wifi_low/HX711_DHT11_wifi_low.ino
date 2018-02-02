@@ -102,7 +102,7 @@ void loop()
 {
   // GET DATA  
   // weight
-  float weight = scale.get_units();//* .005600966442953021;
+  float weight = scale.read(); //scale.get_units();//* .005600966442953021;
   Serial.print("Weight: ");
   Serial.print(weight, 3); //tara con 3.870kg
     // temperature
@@ -147,8 +147,9 @@ void loop()
   // DELAY
   Serial.print('\n');
   //delay(1000);
-  delay(60000);
-  //ESP.deepSleep(SECONDS_DS(10), WAKE_RF_DEFAULT);
+  delay(6000);
+  // TO USE SLEEP: RST connected to D0
+  ESP.deepSleep(SECONDS_DS(120), WAKE_RF_DEFAULT);  
   // Execution resumes at the top of this function.
   delay(100);
 }

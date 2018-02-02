@@ -1,3 +1,4 @@
+/*
 ///////////////////
 // CONFIGURE HX711
 #include "HX711.h"//The library used for arduino  https://github.com/bogde/HX711
@@ -15,28 +16,27 @@ HX711 scale;//(HX711_DOUT_PIN, HX711_SCK_PIN); // parameter "gain" omitted; defa
 #define DHT11_PIN D3 //signal pin (has to be digital)
 DHT dht(DHT11_PIN, DHTTYPE);
 //DHT dht(DHTPIN, DHT11);
-
+*/
 // CONFIGURE WIFI
 #include <ESP8266WiFi.h>
 /*// CELL
   const char *ssid =  "gabgab";  
   const char *pass =  "12345678";
 */
-
+/*
 // TELECOM
 const char *ssid =  "Telecom-58120441";     
 const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-
+*/
 /*
   // FASTWEB
   const char *ssid =  "FASTWEB-1-0D2259";     /
   const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
 */
-/*
 // Arsenale della Terra
   const char *ssid =  "dlink_DWR-730_2F6E";    
   const char *pass =  "arsenaleterra2017";
-*/
+
 // CONFIGURE SERVER
 const char* server = "api.thingspeak.com";
 String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
@@ -49,7 +49,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("HX711_DHT11_wifi");
 
-
+/*
   // SETUP HX711
   scale.begin(HX711_DOUT_PIN,HX711_SCK_PIN);
   
@@ -79,7 +79,7 @@ void setup()
   delay(15);
   // print the average of 5 readings from the ADC minus tare weight,
   //divided by the SCALE parameter set with set_scale
-
+*/
   //SETUP WIFI
   Serial.println("Connecting to ");
   Serial.println(ssid);  Serial.println("HX711_DHT11_wifi");
@@ -95,6 +95,7 @@ void setup()
 }
 void loop()
 {
+  /*
   // GET DATA  M
   // weight
   float weight = scale.get_units();//* .005600966442953021;
@@ -108,24 +109,30 @@ void loop()
   Serial.print(t);
   Serial.print(" degrees Celsius, Humidity: ");
   Serial.print(h);
-  Serial.print('\n');
+  Serial.print('\n');]
+  */
 
   // SEND TO THINGSPEAK
+  /*
   Serial.println("%. Send to Thingspeak.");
   if (isnan(t) || isnan(h))
   {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
+  */
   if (client.connect(server, 80))  //   "184.106.153.149" or api.thingspeak.com
   {
+    
     String postStr = apiKey;
-    postStr += "&field1=";
+    /*postStr += "&field1=";
     postStr += String(weight);
     postStr += "&field2=";
     postStr += String(t);
     postStr += "&field3=";
-    postStr += String(h);
+    postStr += String(h);*/
+    postStr += "&field5=";
+    postStr += String(0);
     postStr += "\r\n\r\n";
     client.print("POST /update HTTP/1.1\n");
     client.print("Host: api.thingspeak.com\n");
