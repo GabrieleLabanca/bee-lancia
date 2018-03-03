@@ -18,15 +18,23 @@ DHT dht(DHT11_PIN, DHTTYPE);
 
 // CONFIGURE WIFI
 #include <ESP8266WiFi.h>
+
+
+// CASA RINALDO
+  const char *ssid =  "WIFIRINALDO";  
+  const char *pass =  "12345678";
+
+
 /*// CELL
   const char *ssid =  "gabgab";  
   const char *pass =  "12345678";
 */
 
+/*
 // TELECOM
 const char *ssid =  "Telecom-58120441";     
 const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-
+*/
 /*
   // FASTWEB
   const char *ssid =  "FASTWEB-1-0D2259";     /
@@ -100,6 +108,9 @@ void loop()
   float weight = scale.get_units();//* .005600966442953021;
   Serial.print("Weight: ");
   Serial.print(weight, 3); //tara con 3.870kg
+  float weight_raw = scale.read();
+  Serial.print(" Raw weight: ");
+  Serial.print(weight_raw, 3);
     // temperature
   float t = dht.readTemperature();
   // humidity
@@ -126,6 +137,8 @@ void loop()
     postStr += String(t);
     postStr += "&field3=";
     postStr += String(h);
+    postStr += "&field4=";
+    postStr += String(weight_raw);
     postStr += "\r\n\r\n";
     client.print("POST /update HTTP/1.1\n");
     client.print("Host: api.thingspeak.com\n");
@@ -141,7 +154,9 @@ void loop()
 
   // DELAY
   Serial.print('\n');
-  delay(60000);
+  int n_min = 10;
+  int delay_time = 1000*60*n_min;
+  delay(delay_time);
 }
 
 

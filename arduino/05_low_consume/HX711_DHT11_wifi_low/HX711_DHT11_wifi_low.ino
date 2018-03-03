@@ -149,7 +149,7 @@ void loop()
   //delay(1000);
   delay(6000);
   // TO USE SLEEP: RST connected to D0
-  ESP.deepSleep(SECONDS_DS(120), WAKE_RF_DEFAULT);  
+  ESP.deepSleep(SECONDS_DS(600), WAKE_RF_DEFAULT);  
   // Execution resumes at the top of this function.
   delay(100);
 }

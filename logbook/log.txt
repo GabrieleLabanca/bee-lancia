@@ -340,3 +340,26 @@ INCREDIBILMENTE funziona: HX711_DHT11_wifi_low.ino
 C'e' la presa dati, ThingSpeak e il esp.deepSleep
 ### TODO ###
 Quando c'e' il reset, la tara si ritara (appunto), quindi va trovato un modo di storare la tara precedente  -->> si potrebbe cogliere l'occasione per risolvere (forse) anche il problema degli sbalzi di tara, ritarando ogni tot, ma sapendo quanto deve venire
+
+
+180303
+Anche se è passato tempo, non sono stato con le mani in mano:
+- il prototipo con low battery funziona
+- il pannello solare funziona, ma non abbastanza -> devo fare misure di carica/scarica
+- contatto con Giampaolo Mancini
+- prototipo dato a Rinaldo in attesa di montaggio e feedback
+
+Parlando di # MISURE DI CARICA # della batteria, mi sembra di aver capito che:
+- misurare il voltaggio della batteria dà un'indicazione della carica (https://www.powerstream.com/1922/battery_1922_WITTE/batteryfiles/chapter05.htm)
+- non dà problemi misurare la carica della batteria con cui alimento l'Arduino (https://forum.arduino.cc/index.php?topic=92074.0)
+Segue che basta collegare il - a ground, il + a A0 e misurare con analogRead(0) il voltaggio, con le seguenti accortezze:
+- settare il riferimento a 1.1V interno ad arduino con analogReference(INTERNAL) (https://forum.arduino.cc/index.php?topic=92074.15)
+- limitare il voltaggio per non rompere Arduino
+[ per due pile da 1.5V in serie = 3V, assumendo una corrente dell'ordine dei mA,la caduta di potenziale potrebbe essere tranquillamente di 2V -> 1V all'Arduino; per la legge di Ohm R=2kOhm. 
+Dubbio: devo metterlo sia su - sia su + ? ]
+Quindi:
+  ¤ GND -> resistenza -> - della batteria
+  ¤ A0  -> resistenza -> + della batteria
+  ¤ alimentazione qualunque
+  ¤ analogReference(INTERNAL) e analogRead(0)
+Poi ci sarà da regolare i dati per avere il voltaggio esatto, ma non è di primario interesse dato che ci interessa la percentuale e la forma della scarica.
