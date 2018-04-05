@@ -363,3 +363,10 @@ Quindi:
   ¤ alimentazione qualunque
   ¤ analogReference(INTERNAL) e analogRead(0)
 Poi ci sarà da regolare i dati per avere il voltaggio esatto, ma non è di primario interesse dato che ci interessa la percentuale e la forma della scarica.
+
+180405
+In realtà lo schema deve essere diverso, come mi ha scritto Roberto:
+gnd-R2-battnegativo
+A0-R1-R2
+R1-battpositivo
+e leggo da A0
