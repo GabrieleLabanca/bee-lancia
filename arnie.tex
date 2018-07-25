@@ -1,0 +1,45 @@
+\documentclass{article}
+
+\title{Prototyping a device for monitoring in  apiculture}
+\author{Gabriele Labanca}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+
+%\usepackage[backend=biber,style=authoryear,sorting=nty]{biblatex}
+%\bibliography{bib/numerical.bib} 
+
+\usepackage[utf8]{inputenc}
+\setcounter{tocdepth}{4}
+\usepackage{wrapfig}
+
+\usepackage{color}
+\newcommand{\todo}[1]{\colorbox{yellow}{#1}}
+
+\usepackage{afterpage} %\afterpage{\clearpage}
+
+\usepackage{hyperref} %autoref
+\renewcommand{\tableautorefname}{Table}
+\renewcommand{\sectionautorefname}{}
+\renewcommand{\subsectionautorefname}{}
+\renewcommand{\subsubsectionautorefname}{}
+\renewcommand{\paragraphautorefname}{}
+%\renewcommand{\equationautorefname}{}
+
+\begin{document}
+\maketitle
+
+\include{latex/device}
+\include{latex/coding}
+\include{latex/thingspeak}
+\include{latex/analysis}
+
+\include{latex/battery}
+\include{latex/rest}
+
+\include{latex/codes}
+%\lstinputlisting[language=C]{source.C}
+
+%\printbibliography
+\end{document}
