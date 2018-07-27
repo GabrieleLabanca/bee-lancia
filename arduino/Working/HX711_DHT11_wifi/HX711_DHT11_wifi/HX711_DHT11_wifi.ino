@@ -20,31 +20,10 @@ DHT dht(DHT11_PIN, DHTTYPE);
 #include <ESP8266WiFi.h>
 
 
-// CASA RINALDO
-  const char *ssid =  "WIFIRINALDO";  
-  const char *pass =  "12345678";
-
-
-/*// CELL
-  const char *ssid =  "gabgab";  
-  const char *pass =  "12345678";
-*/
-
-/*
-// TELECOM
-const char *ssid =  "Telecom-58120441";     
-const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-*/
-/*
-  // FASTWEB
-  const char *ssid =  "FASTWEB-1-0D2259";     /
-  const char *pass =  "CviK6uXSQLucijkT1XT8BlFP";
-*/
-/*
-// Arsenale della Terra
+// Configure WIFI
   const char *ssid =  "dlink_DWR-730_2F6E";    
   const char *pass =  "arsenaleterra2017";
-*/
+
 // CONFIGURE SERVER
 const char* server = "api.thingspeak.com";
 String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak

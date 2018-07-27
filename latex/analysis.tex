@@ -1,0 +1,66 @@
+\section{Data}
+A very simple, yet satisfactory, approach has been taken to the elaboration of data: a sample over one or more days is considered, of which the weight-temperature points are fitted with a linear function. Assuming that the weight variation is neglectable with respect to the dependence on temperature of the response of the load cells, which is usually a decent assumption, the relation found corrects the instrumental noise:
+\[ w_{\mathrm{vero}}[i] = w_{\mathrm{misurato}}[i] - (w_0 + m*T[i]) \]
+It is worth noting that without correction the uncertainty is of order $0.01 kg$, so depending on the aim of the project may be that no correction is necessary to obtain an acceptable result.
+
+The Matlab code, which can be directly used in a \textit{visualization} on Thingspeak.com, is presented:
+\begin{lstlisting}[language=Matlab]
+%%%%%%%%%%%%%%%%%%%%%%%
+% this code gets data (weight, temperature) from Pesatura Arnie (ChID 350718)
+% the correlation between the two variables is used to clean weight data
+% so they are not subject to temperature variation
+% the results are then averaged and displayed (original data vs. clean data) 
+
+% read/write variables
+writeChId = ......; % channel write id
+writeKey = '.....'; % channel write API key
+readChId = .......; % channel read id
+readKey  = '.....'; % channel read API key
+
+% retrieve last 100 data from Fields 1 and 2
+npoints = 3*24*7;
+[dataWeight,timestamps] = thingSpeakRead(readChId,'NumPoints',npoints,'Fields',1);%,'ReadKey',readKey);
+dataTemperature = thingSpeakRead(readChId,'NumPoints',npoints,'Fields',2);%,'ReadKey',readKey);
+dataHumidity = thingSpeakRead(readChId,'NumPoints',npoints,'Fields',3);
+oldW = dataWeight; % keeps old measure
+% clean data, using correlation with Temperature
+m = 0.01; % correlation coefficient
+n_back = 2; % NB the temperature affects weight with a DELAY!
+T0 = 3 
+for i=1:npoints
+    if(i<(n_back+1))
+            Delta2 = dataWeight(i)-dataWeight(1)-m*(dataTemperature(i)-T0);
+    else
+            Delta2 = dataWeight(i)-dataWeight(1)-m*(dataTemperature(i-n_back)-T0);
+    end
+    dataWeight(i) = Delta2;
+end
+% find mean values
+nmean = 40;
+mean = [0,0];
+mean_dataWeight = [];
+mean_oldW = [];
+mean_timestamps = timestamps(1:npoints/nmean);
+for i=1:npoints
+    mean(1) = mean(1) + dataWeight(i);
+    mean(2) = mean(2) + oldW(i);
+      if isequal(mod(i,nmean),0)
+          mean_dataWeight(i/nmean) =  mean(1)/nmean;
+          mean_oldW(i/nmean) = mean(2)/nmean;
+          mean_timestamps(i/nmean) = timestamps(i-nmean/2); % center of interval
+          mean = [0,0];
+      end       
+end
+numel(mean_dataWeight);
+numel(mean_oldW);
+numel(mean_timestamps);
+
+%% Visualize Data %%
+prevision = [];
+for i=1:npoints
+    prevision(i) = -dataWeight(1)+m*(dataTemperature(i)-T0);
+end
+A = horzcat(dataTemperature,transpose(prevision));
+B = horzcat(transpose(mean_dataWeight),transpose(mean_oldW));
+thingSpeakPlot(mean_timestamps,B,'XLabel','time','YLabel','weight(kg)','Title','weight with respect to original weight','Legend',{'corrected','measured'});
+\end{lstlisting}

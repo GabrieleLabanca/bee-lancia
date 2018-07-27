@@ -1,0 +1,41 @@
+\section{Thingspeak.com}
+As far as data visualization is concerned, the website Thingspeak.com, powered by Matlab plugins, has been the platform of choice. Provided that one has an account (a free plan exists), the website allows the creation of a \textit{channel}, which can contain up to 8 fields remotely updated with the provided API. \\
+
+On NodeMCU boards, the following code starts a server connection
+
+\begin{lstlisting}[language=C]
+#include <ESP8266WiFi.h>
+const char* server = "api.thingspeak.com";
+String apiKey = "..........";     //  Enter the Write API key from ThingSpeak
+WiFiClient client;
+WiFi.begin(ssid, pass);
+  while (WiFi.localIP().toString() == "0.0.0.0") 
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("WiFi connected");
+\end{lstlisting}
+
+while a String must be created to post it to the server:
+
+\begin{lstlisting}[language=C]
+if (client.connect(server, 80)) 
+  {
+    String postStr = apiKey;
+    postStr += "&field1=";
+    postStr += String(my_measure);
+    postStr += "\r\n\r\n";
+    client.print("POST /update HTTP/1.1\n");
+    client.print("Host: api.thingspeak.com\n");
+    client.print("Connection: close\n");
+    client.print("X-THINGSPEAKAPIKEY: " + apiKey + "\n");
+    client.print("Content-Type: application/x-www-form-urlencoded\n");
+    client.print("Content-Length: ");
+    client.print(postStr.length());
+    client.print("\n\n");
+    client.print(postStr);
+  }
+  client.stop();
+\end{lstlisting}
+
