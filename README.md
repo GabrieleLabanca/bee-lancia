@@ -1,4 +1,9 @@
 # Pesatura_Arnie
+The project has been brought on in collaboration with [Sermig](http://www.sermig.org/) onlus.
+Please read **arnie.pdf** for a full description of the last version of the prototype.
+
+
+
 È un progetto sostenuto dall'associazione [Sermig](http://www.sermig.org/) e in particolare dal suo gruppo Restituzione Tecnologica.
 
 Vista la situazione di attuale difficoltà del settore dell'apicoltura, dovuto a malattie delle api e inquinamento, è nata l'idea di un progetto di monitoraggio a distanza delle arnie, a basso costo, che aiuti materialmente gli apicoltori.
