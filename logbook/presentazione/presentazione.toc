@@ -1,5 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Prime prove}{2}{0}{1}
-\beamer@sectionintoc {2}{Saldatura e stabilit\`a}{4}{0}{2}
-\beamer@sectionintoc {3}{Misure di temperatura}{7}{0}{3}
-\beamer@sectionintoc {4}{Hardware senza fili}{11}{0}{4}
