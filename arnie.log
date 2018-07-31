@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.7.25)  31 JUL 2018 10:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.7.25)  31 JUL 2018 10:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,7 +358,7 @@ LaTeX Info: Redefining \nameref on input line 64.
 \openout2 = `latex/device.aux'.
 
  (./latex/device.tex
-<latex/img/device_scheme.png, id=58, 694.09312pt x 275.52937pt>
+<latex/img/device_scheme.png, id=81, 694.09312pt x 275.52937pt>
 File: latex/img/device_scheme.png Graphic file (type png)
 <use latex/img/device_scheme.png>
 Package pdftex.def Info: latex/img/device_scheme.png  used on input line 6.
@@ -394,13 +394,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--43
 
  []
 
-<latex/img/loadcells_scheme.png, id=98, 831.84245pt x 457.95581pt>
+<latex/img/loadcells_scheme.png, id=121, 831.84245pt x 457.95581pt>
 File: latex/img/loadcells_scheme.png Graphic file (type png)
 <use latex/img/loadcells_scheme.png>
 Package pdftex.def Info: latex/img/loadcells_scheme.png  used on input line 48.
 
 (pdftex.def)             Requested size: 224.2479pt x 123.45406pt.
-<latex/img/dht_scheme.png, id=99, 519.44063pt x 215.30438pt>
+<latex/img/dht_scheme.png, id=122, 519.44063pt x 215.30438pt>
 File: latex/img/dht_scheme.png Graphic file (type png)
 <use latex/img/dht_scheme.png>
 Package pdftex.def Info: latex/img/dht_scheme.png  used on input line 55.
@@ -448,22 +448,22 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) [7
 
 
-] [8]) [9] [10
+]
+
+Package hyperref Warning: No autoref name for `lstnumber' on input line 49.
+
+[8]) [9] [10
 
 ]
 \openout2 = `latex/appendice.aux'.
 
-
-(./latex/appendice.tex
-
-LaTeX Warning: Reference `img:battery_scheme' on page 11 undefined on input lin
-e 2.
-
-<latex/img/battery_scheme.png, id=313, 673.76718pt x 375.65344pt>
+ (./latex/appendice.tex
+<latex/img/battery_scheme.png, id=337, 673.76718pt x 375.65344pt>
 File: latex/img/battery_scheme.png Graphic file (type png)
 <use latex/img/battery_scheme.png>
 Package pdftex.def Info: latex/img/battery_scheme.png  used on input line 6.
 (pdftex.def)             Requested size: 224.2479pt x 125.02643pt.
+
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -476,17 +476,8 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
 (./latex/thingspeak.aux) (./latex/analysis.aux) (./latex/appendice.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 84.
-
-
-Package rerunfilecheck Warning: File `arnie.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `arnie.out':
-(rerunfilecheck)             Before: 53490C78F34215E87EB20B4AE8FECC90;399
-(rerunfilecheck)             After:  87452FEB77123433DD79B4057C422528;585.
-
-LaTeX Warning: There were undefined references.
+Package rerunfilecheck Info: File `arnie.out' has not changed.
+(rerunfilecheck)             Checksum: 87452FEB77123433DD79B4057C422528;585.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -494,10 +485,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 84.
  ) 
 Here is how much of TeX's memory you used:
- 8682 strings out of 492649
- 120822 string characters out of 6135778
- 429412 words of memory out of 5000000
- 12115 multiletter control sequences out of 15000+600000
+ 8686 strings out of 492649
+ 120888 string characters out of 6135778
+ 429992 words of memory out of 5000000
+ 12119 multiletter control sequences out of 15000+600000
  11804 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,8n,53p,486b,1947s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -518,10 +509,10 @@ usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt8.pfb>
-Output written on arnie.pdf (13 pages, 356591 bytes).
+Output written on arnie.pdf (13 pages, 361162 bytes).
 PDF statistics:
- 582 PDF objects out of 1000 (max. 8388607)
- 533 compressed objects within 6 object streams
+ 603 PDF objects out of 1000 (max. 8388607)
+ 554 compressed objects within 6 object streams
  326 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

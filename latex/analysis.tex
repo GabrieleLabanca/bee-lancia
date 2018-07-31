@@ -46,7 +46,7 @@ thingSpeakPlot(mean_timestamps,mean_dataWeight,'XLabel','tempo','YLabel','peso (
 
 A very simple, yet satisfactory, approach has been taken to the elaboration of data: a sample over one or more days is considered, of which the weight-temperature points are fitted with a linear function. Assuming that the weight variation is neglectable with respect to the dependence on temperature of the response of the load cells, which is usually a decent assumption, the relation found corrects the instrumental noise:
 \[ w_{\mathrm{vero}}[i] = w_{\mathrm{misurato}}[i] - (w_0 + m*T[i]) \]
-It is worth noting that without correction the uncertainty on the average is of order $0.01 kg$, so depending on the aim of the project may be that no correction is necessary to obtain an acceptable result. 
+It is worth noting that without correction the uncertainty on the average is of order $0.01 kg$, so depending on the aim of the project may be that no correction is necessary to obtain an acceptable result. Moreover, calibrating online as in \autoref{topic:scale_tare} appears to reduce the dependence on temperature.
 
 The Matlab code, which can be directly used in a \textit{visualization} on Thingspeak.com, is presented (the weight is calibrated as in the previous code):
 \begin{lstlisting}[language=Matlab]
