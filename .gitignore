@@ -1,0 +1,5 @@
+*.out
+arnie.log
+*.idx
+*.aux
+*.toc
