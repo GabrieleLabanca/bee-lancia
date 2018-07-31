@@ -21,12 +21,12 @@ DHT dht(DHT11_PIN, DHTTYPE);
 
 
 // WIFI CREDENTIALS
-const char *ssid = "FASTWEB-D68BC7";
-const char *pass = "CY3APAPE3J";
+const char *ssid = "";
+const char *pass = "";
 
 // CONFIGURE SERVER
 const char* server = "api.thingspeak.com";
-String apiKey = "AG5BH0BV8ITOCAUL";     //  Enter your Write API key from ThingSpeak
+String apiKey = "";     //  Enter your Write API key from ThingSpeak
 WiFiClient client;
 
 void setup()
