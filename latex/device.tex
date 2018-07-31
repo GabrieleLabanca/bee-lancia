@@ -15,7 +15,7 @@ A Wheatstone bridge configuration for four load cells is used \footnote{\url{htt
 les.com/id/Make-your-weighing-scale-hack-using-arduino/, https://www.sparkfun.com/products/13878?_ga=1.186640489.1126097763.1485380550}}; see \autoref{img:loadcells_scheme}. Since the signal is too weak to be detected directly by the board, a HX711 amplifier is used; in the figure the schematics of connections to the board are shown.
 
 
-In order to make the HX711 work, the library \texttt{HX711.h} is used \footnote{\url{https://github.com/bogde/HX711}}. The code highlights follow:
+In order to make the HX711 work, the library \texttt{HX711.h} is used \footnote{\url{https://github.com/bogde/HX711}}. The relevant code follows:
 \begin{lstlisting}[language=C]
 #include "HX711.h"
 // set the pins used by the amplifier
@@ -24,7 +24,8 @@ In order to make the HX711 work, the library \texttt{HX711.h} is used \footnote{
 // create a HX711 object
 HX711 scale;                      
 scale.begin(HX711_DOUT_PIN,HX711_SCK_PIN);
-scale.power_up();
+scale.power_up(); // turn on the scale
+scale.power_down(); // turn off the scale
 // the value of myscale is obtained by calibrating 
 //   the scale with known weights
 scale.set_scale(myscale);         
@@ -32,7 +33,13 @@ scale.set_scale(myscale);
 scale.tare();                     
 // get weight (tare and scale)
 float weight = scale.get_units(); 
+// get value of weight without tare 
+float weight_raw = scale.read();
 \end{lstlisting}
+
+\label{topic:scale_tare}
+Although, as shown in the code, it is possible to tare the scale with methods internal to the HX711 library, it is preferable to set up the tare with an external code: in order to reduce the calculations made on the NodeMCU and to make it more portable (i.e. requiring the least hands-on manteinance, allowing a remote intervention) such setup is done on Thingspeak: see \autoref{code:ts:tare}. \\
+Apart of that, there are other advantages here. A big problem with the scale was its recalibration at each "reboot", so that the weight had to be removed and put on again; moreover, bumps (even small ones) could cause a recalibration too: since the calibration is now done online, once set there is no need to remove weights at reboots and to fear small bumps.  
 
 \begin{figure}[!htb] 
   \centering
