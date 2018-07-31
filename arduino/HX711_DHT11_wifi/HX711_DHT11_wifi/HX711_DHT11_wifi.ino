@@ -38,33 +38,6 @@ void setup()
   // SETUP HX711
   scale.begin(HX711_DOUT_PIN, HX711_SCK_PIN);
 
-  /*delay(1000);
-  Serial.println("Before setting up the scale:");
-  Serial.print("read: \t\t ");
-  Serial.println(scale.read());     // print a raw reading from the ADC
-  float myscale = 114. / .005600966442953021;
-  scale.set_scale(myscale); // this value is obtained by calibrating the scale with known weights;
-  scale.tare();   // reset the scale to 0
-  Serial.println("After setting up the scale:");
-  Serial.print("read: \t\t");
-  Serial.println(scale.read());                        // print a raw reading from the ADC
-  delay(15);
-  // print the average of 20 readings from the ADC
-  Serial.print("read average:\t\t ");
-  delay(15);
-  Serial.println(scale.read_average(20));
-  delay(15);
-  // print the average of 5 readings from the ADC minus the tare weight, set with tare()
-  Serial.print("get value: \t\t ");
-  Serial.println(scale.get_value(5));
-  delay(15);
-  Serial.print("get units: ");
-  Serial.println(scale.get_units(5), 1);
-  delay(15);
-  // print the average of 5 readings from the ADC minus tare weight,
-  //divided by the SCALE parameter set with set_scale
-  */
-
   //SETUP WIFI
   Serial.println("Connecting to ");
   Serial.println(ssid);  Serial.println("HX711_DHT11_wifi");
@@ -80,17 +53,14 @@ void setup()
 }
 void loop()
 {
-  // GET DATA  MWIFIRINALDO
+  // GET DATA
   // weight
   scale.power_up();
-  /*float weight = scale.get_units();//* .005600966442953021;
-  Serial.print("Weight: ");
-  Serial.print(weight, 3); //tara con 3.870kg
-  */
   float weight_raw = scale.read();
   Serial.print(" Raw weight: ");
   Serial.print(weight_raw, 3);
   scale.power_down(); 
+  
   // temperature
   float t = dht.readTemperature();
   // humidity

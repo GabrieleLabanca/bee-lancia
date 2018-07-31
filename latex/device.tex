@@ -39,7 +39,9 @@ float weight_raw = scale.read();
 
 \label{topic:scale_tare}
 Although, as shown in the code, it is possible to tare the scale with methods internal to the HX711 library, it is preferable to set up the tare with an external code: in order to reduce the calculations made on the NodeMCU and to make it more portable (i.e. requiring the least hands-on manteinance, allowing a remote intervention) such setup is done on Thingspeak: see \autoref{code:ts:tare}. \\
-Apart of that, there are other advantages here. A big problem with the scale was its recalibration at each "reboot", so that the weight had to be removed and put on again; moreover, bumps (even small ones) could cause a recalibration too: since the calibration is now done online, once set there is no need to remove weights at reboots and to fear small bumps.  
+Apart of that, there are other advantages here. A big problem with the scale was its recalibration at each "reboot", so that the weight had to be removed and put on again; since the calibration is now done online, once set there is no need to remove weights at reboots. \\
+
+A \textbf{known problem} whith this system: bumps (even small ones) could cause a rescaling of the non-calibrated readings, compromising the values. 
 
 \begin{figure}[!htb] 
   \centering
